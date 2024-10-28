@@ -1,0 +1,22 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "airbnb-base",
+        "plugin:prettier/recommended"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "rules": {
+        // 필요한 추가 규칙이 있다면 여기에 설정할 수 있습니다.
+        "prettier/prettier": ["error"],
+        "indent": ["error", 4],
+        "no-console": "off"
+    }
+}
