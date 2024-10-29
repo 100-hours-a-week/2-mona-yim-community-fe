@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width"
+            ,
+            initial-scale="1.0"
+        />
+        <title>게시글 추가</title>
+        <link
+            rel="stylesheet"
+            href="/2-mona-yim-community-fe/styles/make_post.css"
+        />
+    </head>
+    <body>
+        <div class="background"></div>
+        <div class="wrap">
+            <div class="header">
+                <img
+                    class="back"
+                    src="/2-mona-yim-community-fe/assets/back_arrow.png"
+                />
+                <div class="title">아무 말 대잔치</div>
+                <img
+                    class="profile"
+                    src="/2-mona-yim-community-fe/assets/profile_image.jpg"
+                />
+            </div>
+            <h2 class="login">게시글 작성</h2>
+            <div class="login-input">
+                <label for="subject">제목*</label>
+                <input
+                    type="text"
+                    id="subject"
+                    placeholder="제목을 입력해주세요. (최대 26글자)"
+                />
+            </div>
+            <div class="login-input">
+                <label for="content">내용*</label>
+                <textarea placeholder="내용을 입력해주세요."></textarea>
+                <p class="helper-text">*helper text</p>
+            </div>
+            <div class="login-input">
+                <label for="content">이미지</label>
+                <input type="file" id="post_image" accept="image/*" />
+            </div>
+            <div class="buttons">
+                <button id="signin">완료</button>
+            </div>
+        </div>
+    </body>
+</html>
