@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width"
+            ,
+            initial-scale="1.0"
+        />
+        <title>회원정보수정</title>
+        <link
+            rel="stylesheet"
+            href="/2-mona-yim-community-fe/styles/edit_profile.css"
+        />
+    </head>
+    <body>
+        <div class="background"></div>
+        <div class="wrap">
+            <div class="header">
+                <div class="title">아무 말 대잔치</div>
+                <img
+                    class="profile"
+                    src="/2-mona-yim-community-fe/assets/profile_image.jpg"
+                />
+                <div class="drop-down"></div>
+            </div>
+            <h2 class="login">회원정보수정</h2>
+            <article>
+                <div class="login-input">
+                    <label for="profile">프로필 사진*</label>
+                    <p class="helper-text">*helper text</p>
+                    <div class="circle">
+                        <img
+                            src="/2-mona-yim-community-fe/assets/profile_image.jpg"
+                        />
+                        <input type="file" id="profile" accept="image/*" />
+                        <div class="change-button">변경</div>
+                    </div>
+                </div>
+                <div class="login-input">
+                    <label for="id">이메일</label>
+                    <p class="user-text">startupcode@gmail.com</p>
+                </div>
+                <div class="login-input">
+                    <label for="text">닉네임</label>
+                    <input
+                        type="text"
+                        name="username"
+                        id="username"
+                        value="스타트업코드"
+                    />
+                    <p class="helper-text">*helper text</p>
+                </div>
+                <div class="buttons">
+                    <button id="signin">수정하기</button>
+                    <a href="">회원 탈퇴</a>
+                </div>
+                <div class="button-container">
+                    <button id="upload">수정 완료</button>
+                </div>
+            </article>
+        </div>
+    </body>
+</html>
