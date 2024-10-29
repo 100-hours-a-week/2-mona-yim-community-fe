@@ -1,0 +1,157 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f5f7;
+    margin: 0;
+}
+
+article {
+    width: 100%;
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 35px;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/2-mona-yim-community-fe/assets/background.png'); /* 배경 이미지 경로 */
+    background-size: cover; /* 화면 전체에 꽉 채움 */
+    background-position: center;
+    z-index: -1; /* 배경을 뒤로 보냄 */
+}
+
+.wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 400px; /* 가로 최대 너비 제한 */
+    height: 100vh; /* 화면 세로 전체를 채움 */
+    background-color: #f4f5f7;
+}
+
+.header {
+    width: 100%;
+    height: 9.63vh;
+    display: grid;
+    grid-template-areas: 'left title right';
+    grid-template-columns: 52px 1fr 52px;
+    border-bottom: 1px solid #000000;
+    align-items: center;
+    justify-content: center;
+    padding: 28px 0px;
+}
+
+.header .title {
+    grid-area: title;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.header img {
+    width: 36px;
+    height: 36px;
+    grid-area: right;
+    border-radius: 50%;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.body .announcement {
+    padding: 40px 0px 28px 0px;
+    font-size: 24px;
+    text-align: center;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    max-width: 360px;
+    padding-bottom: 32px;
+}
+
+.button-container button {
+    background-color: #aca0eb;
+    width: 100px;
+    font-weight: 700;
+    color: #ffffff;
+    height: 33px;
+    border: none;
+    border-radius: 20px;
+    margin-left: auto;
+}
+
+.post-container {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 24px;
+    margin-bottom: 8px;
+}
+
+.post-container h2 {
+    text-align: center;
+}
+
+.post-container .info {
+    width: 360px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-areas: 'likes comments views time';
+    grid-template-columns: 64px 64px 64px 1fr;
+}
+
+.info .likes {
+    grid-area: likes;
+    text-align: center;
+}
+
+.info .comments {
+    grid-area: comments;
+    text-align: center;
+}
+
+.info .views {
+    grid-area: views;
+    text-align: center;
+}
+
+.info .time {
+    grid-area: time;
+    text-align: right;
+}
+
+.writer {
+    display: grid;
+    grid-template-areas: 'profile name';
+    grid-template-columns: 64px 1fr;
+    column-gap: 10px;
+    padding: 4px 0px 4px 0px;
+}
+
+.writer img {
+    width: 36px;
+    height: 36px;
+    grid-area: profile;
+    border-radius: 50%;
+    place-self: center;
+}
