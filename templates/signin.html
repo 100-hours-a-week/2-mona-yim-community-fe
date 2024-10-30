@@ -19,17 +19,21 @@
         <div class="wrap">
             <div class="header">
                 <div class="title">아무 말 대잔치</div>
-                <img
-                    class="back"
-                    src="/2-mona-yim-community-fe/assets/back_arrow.png"
-                />
+                <a href="/2-mona-yim-community-fe/templates/login.html">
+                    <img
+                        class="back"
+                        src="/2-mona-yim-community-fe/assets/back_arrow.png"
+                    />
+                </a>
             </div>
             <hr class="horizontal-rule" />
             <h2 class="login">회원가입</h2>
             <article>
                 <div class="login-input">
                     <label for="profile">프로필 사진</label>
-                    <p class="helper-text">*helper text</p>
+                    <p id="helper-profile" class="helper-text">
+                        *프로필 사진을 추가해주세요.
+                    </p>
                     <div class="circle">
                         <input type="file" id="profile" accept="image/*" />
                         <span class="plus-sign">+</span>
@@ -43,7 +47,7 @@
                         id="id"
                         placeholder="이메일을 입력하세요"
                     />
-                    <p class="helper-text">*helper text</p>
+                    <p id="helper-id" class="helper-text"></p>
                 </div>
                 <div class="login-input">
                     <label for="password">비밀번호</label>
@@ -53,7 +57,7 @@
                         id="pw"
                         placeholder="비밀번호를 입력하세요"
                     />
-                    <p class="helper-text">*helper text</p>
+                    <p id="helper-pw" class="helper-text"></p>
                 </div>
                 <div class="login-input">
                     <label for="password">비밀번호 확인</label>
@@ -63,7 +67,7 @@
                         id="pwcheck"
                         placeholder="비밀번호를 한번 더 입력하세요"
                     />
-                    <p class="helper-text">*helper text</p>
+                    <p id="helper-pwcheck" class="helper-text"></p>
                 </div>
                 <div class="login-input">
                     <label for="text">닉네임</label>
@@ -73,7 +77,7 @@
                         id="username"
                         placeholder="닉네임을 입력해 주세요"
                     />
-                    <p class="helper-text">*helper text</p>
+                    <p id="helper-username" class="helper-text"></p>
                 </div>
                 <div class="buttons">
                     <button id="signin">회원 가입</button>
@@ -81,5 +85,9 @@
                 </div>
             </article>
         </div>
+        <script
+            type="module"
+            src="/2-mona-yim-community-fe/js/signin.js"
+        ></script>
     </body>
 </html>

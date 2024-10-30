@@ -110,6 +110,8 @@ article {
 }
 
 .post-container h2 {
+    width: 26ch;
+    overflow: hidden;
     text-align: center;
 }
 

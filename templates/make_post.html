@@ -36,20 +36,28 @@
                     type="text"
                     id="subject"
                     placeholder="제목을 입력해주세요. (최대 26글자)"
+                    maxlength="26"
                 />
             </div>
             <div class="login-input">
                 <label for="content">내용*</label>
-                <textarea placeholder="내용을 입력해주세요."></textarea>
-                <p class="helper-text">*helper text</p>
+                <textarea
+                    id="content"
+                    placeholder="내용을 입력해주세요."
+                ></textarea>
+                <p id="helper-submit" class="helper-text"></p>
             </div>
             <div class="login-input">
                 <label for="content">이미지</label>
                 <input type="file" id="post_image" accept="image/*" />
             </div>
             <div class="buttons">
-                <button id="signin">완료</button>
+                <button id="submit">완료</button>
             </div>
         </div>
+        <script
+            type="module"
+            src="/2-mona-yim-community-fe/js/make_post.js"
+        ></script>
     </body>
 </html>
