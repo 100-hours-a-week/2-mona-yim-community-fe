@@ -29,18 +29,51 @@ function validateEmail() {
     const emailInput = document.getElementById('id')
     const emailValue = emailInput.value
 
+    // 비어 있는 경우
     if (!emailValue) {
         document.getElementById('helper-id').textContent =
             '*이메일을 입력해주세요.'
+        // 이메일이 유효하지 않은 경우
     } else if (!validEmail(emailValue)) {
         document.getElementById('helper-id').textContent =
             '*올바른 이메일 주소 형식을 입력해주세요. (예: example@example.com)'
+        // 이메일이 중복인 경우
+        // } else if (checkDuplicateEmail(emailValue)) {
+        //     document.getElementById('helper-id').textContent =
+        //         '*중복된 이메일 입니다.'
     } else {
         document.getElementById('helper-id').textContent = ''
         return true
     }
     return false
 }
+
+// 데이터 가져오기 함수
+// async function fetchUserData(url) {
+//     try {
+//         const response = await fetch(url)
+//         if (!response.ok) {
+//             throw new Error(`HTTP error: ${response.status}`)
+//         }
+//         const data = await response.json()
+//         return data
+//     } catch (error) {
+//         console.error('Error: ', error)
+//         return null
+//     }
+// }
+
+// const users = await fetchUserData('/api/users')
+
+// function checkDuplicateEmail(newemail) {
+//     const emailExist = users.some(user => user.email.trim().toLowerCase() === newemail.trim().toLowerCase());
+//     return emailExist;
+// }
+
+// function checkDuplicateUsername(newusername) {
+//     const usernameExist = users.some(user => user.username.trim().toLowerCase() === newusername.trim().toLowerCase());
+//     return usernameExist;
+// }
 
 function validatePassword() {
     const passwordInput = document.getElementById('pw')
@@ -90,11 +123,15 @@ function validateUsername() {
     } else if (usernameValue.length > 10) {
         document.getElementById('helper-username').textContent =
             '*닉네임은최대 10자까지 작성 가능합니다.'
+        // 닉네임 중복 시
+        // }else if (checkDuplicateUsername(usernameValue)) {
+        //     document.getElementById('helper-username').textContent =
+        //         '*중복된 닉네임 입니다.'
     } else {
         document.getElementById('helper-username').textContent = ''
         return true
     }
-    // 닉네임 중복 시 '*중복된 닉네임 입니다.'
+
     return false
 }
 

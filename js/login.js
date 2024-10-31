@@ -40,7 +40,31 @@ function handleLogin() {
 
     if (validateEmail() && validatePassword()) {
         loginButton.style.backgroundColor = '#7F6AEE'
-        window.location.href = '/posts'
+        window.location.href = '/posts' // 지우기
+        // fetch: 이메일 & 비밀번호 확인
+        /* 
+                fetch('/api/users')
+            .then((response) => response.json())
+            .then((users) => {
+                const user = users.find(
+                    (u) => u.email === email && u.password === password
+                )
+                // 로그인 성공
+                if (user) {
+                    window.location.href = '/posts'
+                }
+                // 로그인 실패
+                else {
+                    document.getElementById('helper').textContent =
+                        '*비밀번호가 다릅니다.'
+                    loginButton.style.backgroundColor = '#ACA0EB'
+                }
+            })
+            .catch((error) => {
+                console.error('로그인 중 오류 발생:', error)
+                loginButton.style.backgroundColor = '#ACA0EB'
+            })
+        */
     } else {
         loginButton.style.backgroundColor = '#ACA0EB'
     }
