@@ -110,9 +110,11 @@ article {
 }
 
 .post-container h2 {
+    padding-left: 16px;
+    font-size: 24px;
     width: 26ch;
     overflow: hidden;
-    text-align: center;
+    white-space: nowrap;
 }
 
 .post-container .info {

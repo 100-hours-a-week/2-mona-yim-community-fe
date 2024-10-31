@@ -30,4 +30,10 @@ function formatCount() {
     })
 }
 
+document.querySelectorAll('.post-container').forEach((post) => {
+    post.addEventListener('click', (event) => {
+        window.location.href = '/post'
+    })
+})
+
 formatCount()
