@@ -13,7 +13,7 @@ function handleUnhover() {
 }
 
 function handleCreate() {
-    window.location.href = '/2-mona-yim-community-fe/templates/make_post.html'
+    window.location.href = '/make_post'
 }
 
 function formatCount() {

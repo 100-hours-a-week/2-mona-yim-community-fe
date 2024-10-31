@@ -48,7 +48,7 @@ function handleCancelModal() {
 
 function handleConfirmModal() {
     // 계정 삭제
-    window.location.href = '/2-mona-yim-community-fe/templates/login.html'
+    window.location.href = '/'
 }
 
 function handleDropdown() {
@@ -67,16 +67,13 @@ document.querySelectorAll('.dropdown p').forEach((p) => {
 
     p.addEventListener('click', () => {
         if (p.textContent == '회원정보 수정') {
-            window.location.href =
-                '/2-mona-yim-community-fe/templates/edit_profile.html'
+            window.location.href = '/edit_profile'
         }
         if (p.textContent == '비밀번호 수정') {
-            window.location.href =
-                '/2-mona-yim-community-fe/templates/edit_password.html'
+            window.location.href = '/edit_password'
         }
         if (p.textContent == '로그아웃') {
-            window.location.href =
-                '/2-mona-yim-community-fe/templates/login.html'
+            window.location.href = '/'
         }
     })
 })

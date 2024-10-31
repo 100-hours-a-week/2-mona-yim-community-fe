@@ -40,7 +40,7 @@ function handleLogin() {
 
     if (validateEmail() && validatePassword()) {
         loginButton.style.backgroundColor = '#7F6AEE'
-        window.location.href = '/2-mona-yim-community-fe/templates/posts.html'
+        window.location.href = '/posts'
     } else {
         loginButton.style.backgroundColor = '#ACA0EB'
     }

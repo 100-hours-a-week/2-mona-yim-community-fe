@@ -109,7 +109,7 @@ function handleSignin() {
         validateUsername()
     ) {
         signinButton.style.backgroundColor = '#7F6AEE'
-        window.location.href = '/2-mona-yim-community-fe/templates/login.html'
+        window.location.href = '/'
     } else {
         loginButton.style.backgroundColor = '#ACA0EB'
     }

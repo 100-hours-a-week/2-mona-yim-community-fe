@@ -5,7 +5,7 @@ document.getElementById('cancel').addEventListener('click', handleCancelModal)
 document.getElementById('confirm').addEventListener('click', handleConfirmModal)
 
 function handleEdit() {
-    window.location.href = '/2-mona-yim-community-fe/templates/edit_post.html'
+    window.location.href = '/edit_post'
 }
 
 function handleDelete() {
