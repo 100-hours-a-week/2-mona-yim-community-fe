@@ -1,4 +1,5 @@
 import { validEmail, validPassword } from '../utils/function.js'
+import { loginHelper } from '../api/loginRequest.js'
 
 document.getElementById('id').addEventListener('input', validateEmail)
 document.getElementById('pw').addEventListener('input', validatePassword)
@@ -35,36 +36,22 @@ function validatePassword() {
     return false
 }
 
-function handleLogin() {
+async function handleLogin() {
     const loginButton = document.getElementById('login')
+    const emailValue = document.getElementById('id').value
+    const passwordValue = document.getElementById('pw').value
 
     if (validateEmail() && validatePassword()) {
         loginButton.style.backgroundColor = '#7F6AEE'
-        window.location.href = '/posts' // 지우기
-        // fetch: 이메일 & 비밀번호 확인
-        /* 
-                fetch('/api/users')
-            .then((response) => response.json())
-            .then((users) => {
-                const user = users.find(
-                    (u) => u.email === email && u.password === password
-                )
-                // 로그인 성공
-                if (user) {
-                    window.location.href = '/posts'
-                }
-                // 로그인 실패
-                else {
-                    document.getElementById('helper').textContent =
-                        '*비밀번호가 다릅니다.'
-                    loginButton.style.backgroundColor = '#ACA0EB'
-                }
-            })
-            .catch((error) => {
-                console.error('로그인 중 오류 발생:', error)
-                loginButton.style.backgroundColor = '#ACA0EB'
-            })
-        */
+        const response = await loginHelper(emailValue, passwordValue)
+        if (response.status !== 200) {
+            document.getElementById('helper').textContent =
+                '*비밀번호가 다릅니다.'
+        } else {
+            document.getElementById('helper').textContent = ''
+            const result = await response.json()
+            window.location.href = '/posts' // 지우기
+        }
     } else {
         loginButton.style.backgroundColor = '#ACA0EB'
     }

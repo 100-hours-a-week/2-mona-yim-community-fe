@@ -1,3 +1,6 @@
+import { postsHelper, postHelper } from '../api/postsRequest.js'
+
+document.addEventListener('DOMContentLoaded', fetchPosts)
 document.getElementById('create').addEventListener('mouseover', handleHover)
 document.getElementById('create').addEventListener('mouseout', handleUnhover)
 document.getElementById('create').addEventListener('click', handleCreate)
@@ -16,18 +19,76 @@ function handleCreate() {
     window.location.href = '/make_post'
 }
 
-function formatCount() {
-    const countElements = document.querySelectorAll('.info p')
+function formatCount(count) {
+    if (count >= 1000) {
+        const formattedCount = Math.floor(count / 1000) + 'k'
+        return formattedCount
+    }
+    return count
+}
 
-    countElements.forEach((element) => {
-        const labelText = element.textContent.split(' ')[0] // 숫자 부분 추출
-        const countText = element.textContent.split(' ')[1] // "좋아요수" 등의 텍스트 부분 추출
-        const count = parseInt(countText, 10) // 숫자로 변환
-        if (count >= 1000) {
-            const formattedCount = Math.floor(count / 1000) + 'k'
-            element.innerHTML = `${formattedCount} <br />${labelText}`
-        }
+async function fetchPosts() {
+    const response = await postsHelper() // userId 고쳐넣기
+    const posts = await response.json()
+
+    const postArray = await Promise.all(
+        posts.map(async (post) => {
+            const postResponse = await postHelper(post.postId)
+            return postResponse.json()
+        })
+    )
+    postArray.forEach((postData) => createPosts(postData))
+}
+
+function createPosts(postData) {
+    const postsContainer = document.getElementById('posts-container')
+    const postContainer = document.createElement('div')
+    postContainer.classList.add('post-container')
+
+    // 제목
+    const title = document.createElement('h2')
+    title.textContent = postData.title
+    postContainer.appendChild(title)
+
+    // 정보
+    const infoDiv = document.createElement('div')
+    infoDiv.classList.add('info')
+    infoDiv.innerHTML = `<p class="likes">좋아요 ${formatCount(
+        postData.likes
+    )}</p>
+                        <p class="comments">댓글 ${formatCount(
+                            postData.comments
+                        )}</p>
+                        <p class="views">조회수 ${formatCount(
+                            postData.views
+                        )}</p>
+                        <p class="time">${postData.time}</p>`
+
+    postContainer.appendChild(infoDiv)
+
+    const hr = document.createElement('hr')
+    hr.setAttribute('color', '#f4f5f7')
+    postContainer.appendChild(hr)
+
+    // 작성자 정보
+    const writerDiv = document.createElement('div')
+    writerDiv.classList.add('writer')
+    const profileImg = document.createElement('img')
+    profileImg.classList.add('profile')
+    profileImg.src = postData.profileImageUrl || '/assets/profile_image.jpg'
+    const name = document.createElement('p')
+    name.classList.add('name')
+    name.textContent = postData.username
+    writerDiv.appendChild(profileImg)
+    writerDiv.appendChild(name)
+
+    postContainer.appendChild(writerDiv)
+
+    postContainer.addEventListener('click', () => {
+        window.location.href = `/post/${postData.postId}`
     })
+
+    postsContainer.appendChild(postContainer)
 }
 
 document.querySelectorAll('.post-container').forEach((post) => {
@@ -35,5 +96,3 @@ document.querySelectorAll('.post-container').forEach((post) => {
         window.location.href = '/post'
     })
 })
-
-formatCount()

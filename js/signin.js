@@ -1,4 +1,9 @@
 import { validEmail, validPassword, validUsername } from '../utils/function.js'
+import {
+    emailHelper,
+    signinHelper,
+    usernameHelper,
+} from '../api/signinRequest.js'
 
 document.getElementById('profile').addEventListener('input', handleProfile)
 document.getElementById('id').addEventListener('input', validateEmail)
@@ -11,23 +16,36 @@ document.querySelector('.circle').addEventListener('click', function () {
     document.getElementById('profile').click() // 프로필 사진 업로드 창 열기
 })
 
+let emailStatus = false,
+    pwStatus = false,
+    pwCheckStatus = false,
+    usernameStatus = false
+
+const userInfo = {
+    email: '',
+    password: '',
+    username: '',
+    profileImage: '',
+}
+
 function handleProfile() {
     const profileInput = document.getElementById('profile')
     const profileValue = profileInput.value
+    userInfo.profileImage = profileValue
 
     if (profileValue) {
         document.getElementById('helper-profile').textContent = ''
-        return true
     } else {
         document.getElementById('helper-profile').textContent =
             '*프로필 사진을 추가해주세요.'
     }
-    return false
+    return true
 }
 
-function validateEmail() {
+async function validateEmail() {
     const emailInput = document.getElementById('id')
     const emailValue = emailInput.value
+    userInfo.email = emailValue
 
     // 비어 있는 경우
     if (!emailValue) {
@@ -37,47 +55,26 @@ function validateEmail() {
     } else if (!validEmail(emailValue)) {
         document.getElementById('helper-id').textContent =
             '*올바른 이메일 주소 형식을 입력해주세요. (예: example@example.com)'
-        // 이메일이 중복인 경우
-        // } else if (checkDuplicateEmail(emailValue)) {
-        //     document.getElementById('helper-id').textContent =
-        //         '*중복된 이메일 입니다.'
     } else {
-        document.getElementById('helper-id').textContent = ''
-        return true
+        const response = await emailHelper(emailValue)
+        if (response.status === 200) {
+            document.getElementById('helper-id').textContent = ''
+            emailStatus = true
+            activateButton()
+            return
+        } else {
+            document.getElementById('helper-id').textContent =
+                '*중복된 이메일 입니다.'
+        }
     }
-    return false
+    emailStatus = false
+    deactivateButton()
 }
-
-// 데이터 가져오기 함수
-// async function fetchUserData(url) {
-//     try {
-//         const response = await fetch(url)
-//         if (!response.ok) {
-//             throw new Error(`HTTP error: ${response.status}`)
-//         }
-//         const data = await response.json()
-//         return data
-//     } catch (error) {
-//         console.error('Error: ', error)
-//         return null
-//     }
-// }
-
-// const users = await fetchUserData('/api/users')
-
-// function checkDuplicateEmail(newemail) {
-//     const emailExist = users.some(user => user.email.trim().toLowerCase() === newemail.trim().toLowerCase());
-//     return emailExist;
-// }
-
-// function checkDuplicateUsername(newusername) {
-//     const usernameExist = users.some(user => user.username.trim().toLowerCase() === newusername.trim().toLowerCase());
-//     return usernameExist;
-// }
 
 function validatePassword() {
     const passwordInput = document.getElementById('pw')
     const passwordValue = passwordInput.value
+    userInfo.password = passwordValue
 
     if (!passwordValue) {
         document.getElementById('helper-pw').textContent =
@@ -87,9 +84,12 @@ function validatePassword() {
             '비밀번호는 8자 이상, 20자 이하이며, 대문자, 소문자, 숫자, 특수문자를 각각 최소 1개 포함해야 합니다.'
     } else {
         document.getElementById('helper-pw').textContent = ''
-        return true
+        pwStatus = true
+        activateButton()
+        return
     }
-    return false
+    pwStatus = false
+    deactivateButton()
 }
 
 function validateSame() {
@@ -105,14 +105,18 @@ function validateSame() {
             '비밀번호가 다릅니다.'
     } else {
         document.getElementById('helper-pwcheck').textContent = ''
-        return true
+        pwCheckStatus = true
+        activateButton()
+        return
     }
-    return false
+    pwCheckStatus = false
+    deactivateButton()
 }
 
-function validateUsername() {
+async function validateUsername() {
     const usernameInput = document.getElementById('username')
     const usernameValue = usernameInput.value
+    userInfo.username = usernameValue
 
     if (!usernameValue) {
         document.getElementById('helper-username').textContent =
@@ -123,31 +127,51 @@ function validateUsername() {
     } else if (usernameValue.length > 10) {
         document.getElementById('helper-username').textContent =
             '*닉네임은최대 10자까지 작성 가능합니다.'
-        // 닉네임 중복 시
-        // }else if (checkDuplicateUsername(usernameValue)) {
-        //     document.getElementById('helper-username').textContent =
-        //         '*중복된 닉네임 입니다.'
     } else {
-        document.getElementById('helper-username').textContent = ''
-        return true
+        const response = await usernameHelper(usernameValue)
+        if (response.status === 200) {
+            document.getElementById('helper-username').textContent = ''
+            usernameStatus = true
+            activateButton()
+            return
+        } else {
+            document.getElementById('helper-username').textContent =
+                '*중복된 닉네임 입니다.'
+        }
     }
 
-    return false
+    usernameStatus = false
+    deactivateButton()
 }
 
-function handleSignin() {
+async function handleSignin() {
     const signinButton = document.getElementById('signin')
 
-    if (
-        handleProfile() &&
-        validateEmail() &&
-        validatePassword() &&
-        validateSame() &&
-        validateUsername()
-    ) {
-        signinButton.style.backgroundColor = '#7F6AEE'
-        window.location.href = '/'
-    } else {
-        loginButton.style.backgroundColor = '#ACA0EB'
+    if (emailStatus && pwStatus && pwCheckStatus && usernameStatus) {
+        const response = await signinHelper(userInfo)
+        if (response.status === 201) {
+            window.location.href = '/'
+        }
     }
 }
+
+function activateButton() {
+    const signinButton = document.getElementById('signin')
+    if (emailStatus && pwStatus && pwCheckStatus && usernameStatus) {
+        signinButton.style.backgroundColor = '#7F6AEE'
+    }
+}
+
+function deactivateButton() {
+    const signinButton = document.getElementById('signin')
+    signinButton.style.backgroundColor = '#ACA0EB'
+}
+
+function init() {
+    emailStatus = false
+    pwStatus = false
+    pwCheckStatus = false
+    usernameStatus = false
+}
+
+init()

@@ -1,3 +1,5 @@
+import { usernameHelper } from '../api/signinRequest.js'
+
 document
     .getElementById('edit-button')
     .addEventListener('click', handleprofileEdit)
@@ -8,7 +10,7 @@ document
     .getElementById('profile-photo')
     .addEventListener('click', handleDropdown)
 
-function handleprofileEdit() {
+async function handleprofileEdit() {
     const usernameInput = document.getElementById('username')
     const usernameValue = usernameInput.value
 
@@ -19,10 +21,15 @@ function handleprofileEdit() {
         document.getElementById('helper-username').textContent =
             '*닉네임은 최대 10자까지 작성 가능합니다.'
     } else {
-        document.getElementById('helper-username').textContent = ''
-        showToast()
+        const response = await usernameHelper(usernameValue)
+        if (response.status === 200) {
+            document.getElementById('helper-username').textContent = ''
+            showToast()
+        } else {
+            document.getElementById('helper-username').textContent =
+                '*중복된 닉네임 입니다.'
+        }
     }
-    // 닉네임 중복 시 *중복된 닉네임
 }
 
 function showToast() {

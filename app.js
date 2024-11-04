@@ -13,6 +13,7 @@ app.use('/styles', express.static(path.join(__dirname, 'styles')))
 app.use('/js', express.static(path.join(__dirname, 'js')))
 app.use('/assets', express.static(path.join(__dirname, 'assets')))
 app.use('/utils', express.static(path.join(__dirname, 'utils')))
+app.use('/api', express.static(path.join(__dirname, 'api')))
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'templates', 'login.html'))
