@@ -28,7 +28,7 @@ article {
     align-items: center;
     justify-content: flex-start;
     width: 100%;
-    max-width: 400px; /* 가로 최대 너비 제한 */
+    max-width: 30.83vw; /* 가로 최대 너비 제한 */
     height: 100vh; /* 화면 세로 전체를 채움 */
     background-color: #f4f5f7;
 }
@@ -38,16 +38,15 @@ article {
     height: 9.63vh;
     display: grid;
     grid-template-areas: 'left title right';
-    grid-template-columns: 52px 1fr 52px;
+    grid-template-columns: 193fr 206fr 193fr;
     align-items: center;
     justify-content: center;
-    padding: 28px 0px;
 }
 
 .header .title {
     grid-area: title;
     text-align: center;
-    font-size: 30px;
+    font-size: 2.96vh;
     font-weight: 400;
 }
 
@@ -76,7 +75,7 @@ article {
 }
 
 .body .announcement {
-    padding: 40px 0px 28px 0px;
+    margin-top: 3.84vh;
     font-size: 24px;
     text-align: center;
 }
@@ -86,7 +85,7 @@ article {
     justify-content: flex-end;
     width: 100%;
     max-width: 360px;
-    padding-bottom: 32px;
+    padding-bottom: 3.55vh;
 }
 
 .button-container button {
@@ -100,6 +99,17 @@ article {
     margin-left: auto;
 }
 
+#posts-container {
+    width: 100%; /* wrap의 width에 맞추기 */
+    max-width: 30.83vw; /* wrap의 max-width와 일치시킴 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 24px;
+    row-gap: 0.77vh 0;
+}
+
 .post-container {
     width: 100%;
     justify-content: center;
@@ -110,47 +120,54 @@ article {
 }
 
 .post-container h2 {
-    padding-left: 16px;
-    font-size: 24px;
+    margin-top: 1.73vh;
+    margin-bottom: 0.96vh;
+    padding-left: 2vw;
     width: 26ch;
     overflow: hidden;
     white-space: nowrap;
 }
 
 .post-container .info {
-    width: 360px;
-    margin: 0 auto;
+    margin: 0;
     display: grid;
+    font-size: 10px;
+    padding: 0 2vw;
     grid-template-areas: 'likes comments views time';
-    grid-template-columns: 64px 64px 64px 1fr;
+    grid-template-columns: 58fr 58fr 58fr 370fr;
 }
 
 .info .likes {
     grid-area: likes;
     text-align: center;
+    margin: 0;
 }
 
 .info .comments {
     grid-area: comments;
     text-align: center;
+    margin: 0;
 }
 
 .info .views {
     grid-area: views;
     text-align: center;
+    margin: 0;
 }
 
 .info .time {
     grid-area: time;
     text-align: right;
+    margin: 0;
 }
 
 .writer {
     display: grid;
     grid-template-areas: 'profile name';
-    grid-template-columns: 64px 1fr;
-    column-gap: 10px;
-    padding: 4px 0px 4px 0px;
+    grid-template-columns: 70fr 522fr;
+    column-gap: 0.96vw;
+    font-size: 14px;
+    margin: 0 2vw;
 }
 
 .writer img {

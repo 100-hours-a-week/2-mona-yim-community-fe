@@ -14,7 +14,7 @@ article {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    row-gap: 35px;
+    row-gap: 1.54vh;
 }
 
 .background {
@@ -28,7 +28,7 @@ article {
     align-items: center;
     justify-content: flex-start;
     width: 100%;
-    max-width: 400px; /* 가로 최대 너비 제한 */
+    max-width: 30.83vw; /* 가로 최대 너비 제한 */
     height: 100vh; /* 화면 세로 전체를 채움 */
     background-color: #f4f5f7;
 }
@@ -43,6 +43,7 @@ article {
 
 .header .title {
     height: 2.96vh;
+    width: 10.73vw;
     font-size: 2.96vh;
     display: flex;
     text-align: center;
@@ -60,7 +61,8 @@ article {
 }
 
 .login {
-    margin-bottom: 67px;
+    margin-top: 25.33vh;
+    margin-bottom: 1.73vh;
 }
 
 .login-input {
@@ -68,7 +70,7 @@ article {
     display: flex;
     flex-direction: column;
     position: relative;
-    row-gap: 8px;
+    row-gap: 0.77vh;
     font-weight: 700;
 }
 
@@ -92,7 +94,7 @@ article {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin-top: 67px;
+    margin-top: 2.21vh;
 }
 
 .buttons button {
