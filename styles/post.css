@@ -23,16 +23,15 @@ article {
 }
 
 .wrap {
-    min-height: 100vh;
+    min-height: 125vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     width: 100%;
-    max-width: 400px; /* 가로 최대 너비 제한 */
+    max-width: 30.83vw; /* 가로 최대 너비 제한 */
     height: 100vh; /* 화면 세로 전체를 채움 */
     background-color: #f4f5f7;
-    padding-bottom: 450px;
 }
 
 .header {
@@ -40,16 +39,15 @@ article {
     height: 9.63vh;
     display: grid;
     grid-template-areas: 'left title right';
-    grid-template-columns: 52px 1fr 52px;
+    grid-template-columns: 193fr 206fr 193fr;
     align-items: center;
     justify-content: center;
-    padding: 28px 0px;
 }
 
 .header .title {
     grid-area: title;
     text-align: center;
-    font-size: 30px;
+    font-size: 2.9vh;
     font-weight: 400;
 }
 
@@ -58,6 +56,8 @@ article {
     height: 36px;
     grid-area: right;
     border-radius: 50%;
+    justify-self: end;
+    margin-right: 2.3vw;
 }
 
 .header .back {
@@ -65,11 +65,12 @@ article {
     height: 36px;
     grid-area: left;
     border-radius: 50%;
+    margin-left: 2.3vw;
 }
 
 .horizontal-rule {
     position: absolute;
-    top: 80px;
+    top: 9.63vh;
     width: 100vw;
     height: 1px;
     border: 0;
@@ -77,32 +78,42 @@ article {
 }
 
 .title {
+    margin-top: 2.3vh;
     flex-direction: column;
 }
 
+.title h2 {
+    margin: 0;
+    font-size: 1rem;
+}
+
 .info {
+    margin-top: 1.15vh;
+    margin-bottom: 2.3vh;
     display: grid;
     grid-template-areas: 'profile author time empty modify delete';
     column-gap: 4px;
-    grid-template-columns: 1fr 3fr 5fr 1fr 1.5fr 1.5fr;
-    font-size: 14px;
+    grid-template-columns: 50fr 96fr 150fr 135fr 50fr 50fr;
+    font-size: 1.2rem;
     align-items: center;
-    padding-bottom: 16px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+    font-size: 0.8rem;
 }
 
 .info .profile {
-    width: 36px;
-    height: 36px;
+    width: 3.45vh;
+    height: 3.45vh;
     grid-area: profile;
     border-radius: 50%;
 }
 
 .info .modify {
+    padding: 0;
     grid-area: modify;
 }
 
 .info .delete {
+    padding: 0;
     grid-area: delete;
 }
 
@@ -110,13 +121,14 @@ article {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 12px 6px 12px 6px;
-    row-gap: 8px;
+    margin-top: 2.3vh;
+    row-gap: 2.3vh;
     border-bottom: 1px solid rgba(0, 0, 0, 0.16);
 }
 
 .contents img {
     width: 95%;
+    height: 29vh;
 }
 
 .contents p {
@@ -147,7 +159,8 @@ article {
     width: 100%;
     border-radius: 16px;
     overflow: hidden;
-    margin: 8px 0px;
+    margin-top: 3.07vh;
+    margin-bottom: 2.3vh;
     height: 180px;
     display: flex;
     flex-direction: column;
@@ -157,7 +170,7 @@ article {
     width: 100%;
     resize: none;
     border: none;
-    height: 100%;
+    height: 16vh;
 }
 
 .comments-wrapper div {
@@ -170,10 +183,11 @@ article {
     width: 100px;
     font-weight: 700;
     color: #ffffff;
-    height: 33px;
+    height: 3vh;
     border: none;
     border-radius: 20px;
     margin-left: auto;
+    justify-content: center;
 }
 
 .comments {
@@ -185,28 +199,39 @@ article {
     display: grid;
     grid-template-areas: 'profile author time empty modify delete';
     column-gap: 4px;
-    grid-template-columns: 1fr 3fr 5fr 1fr 1.5fr 1.5fr;
-    font-size: 14px;
+    grid-template-columns: 50fr 96fr 150fr 135fr 45fr 45fr;
+    font-size: 0.8rem;
     align-items: center;
 }
 
 .comment-info .profile {
-    width: 36px;
-    height: 36px;
+    width: 3.45vh;
+    height: 3.45vh;
     grid-area: profile;
     border-radius: 50%;
 }
 
 .comment-info .modify {
     grid-area: modify;
+    padding: 0;
+}
+
+.comment-info .modify button {
+    padding: 0;
 }
 
 .comment-info .delete {
     grid-area: delete;
+    padding: 0;
+}
+
+.comment-info .delete button {
+    padding: 0;
 }
 
 .comment {
     display: grid;
+    font-size: 0.8rem;
     grid-template-areas: 'empty comment';
     grid-template-columns: 1fr 12fr;
 }

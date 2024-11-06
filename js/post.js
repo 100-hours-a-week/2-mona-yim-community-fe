@@ -129,13 +129,12 @@ function createComment(commentData) {
     const modifyDiv = document.createElement('div')
     modifyDiv.classList.add('modify')
     const editButton = document.createElement('button')
-    editButton.classList.add('edit-button')
     editButton.textContent = '수정'
     modifyDiv.appendChild(editButton)
 
     //삭제버튼
     const deleteDiv = document.createElement('div')
-    deleteDiv.classList.add('delete-comment')
+    deleteDiv.classList.add('delete')
     const deleteButton = document.createElement('button')
     deleteButton.textContent = '삭제'
     deleteDiv.appendChild(deleteButton)

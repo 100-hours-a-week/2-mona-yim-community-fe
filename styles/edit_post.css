@@ -29,25 +29,25 @@ article {
     align-items: center;
     justify-content: flex-start;
     width: 100%;
-    max-width: 400px; /* 가로 최대 너비 제한 */
+    max-width: 30.83vw; /* 가로 최대 너비 제한 */
     height: 100vh; /* 화면 세로 전체를 채움 */
     background-color: #f4f5f7;
 }
 
 .header {
     width: 100%;
+    height: 9.63vh;
     display: grid;
     grid-template-areas: 'left title right';
-    grid-template-columns: 52px 1fr 52px;
+    grid-template-columns: 193fr 206fr 193fr;
     align-items: center;
     justify-content: center;
-    padding: 28px 0px;
 }
 
 .header .title {
     grid-area: title;
     text-align: center;
-    font-size: 30px;
+    font-size: 2.9vh;
     font-weight: 400;
 }
 
@@ -56,6 +56,8 @@ article {
     height: 36px;
     grid-area: right;
     border-radius: 50%;
+    justify-self: end;
+    margin-right: 2.3vw;
 }
 
 .header .back {
@@ -63,11 +65,12 @@ article {
     height: 36px;
     grid-area: left;
     border-radius: 50%;
+    margin-left: 2.3vw;
 }
 
 .horizontal-rule {
     position: absolute;
-    top: 80px;
+    top: 9.63vh;
     width: 100vw;
     height: 1px;
     border: 0;
@@ -75,7 +78,8 @@ article {
 }
 
 .login {
-    margin-bottom: 67px;
+    margin-top: 2.3vh;
+    margin-bottom: 4.89vh;
     text-align: center;
 }
 
@@ -84,17 +88,18 @@ article {
     display: flex;
     flex-direction: column;
     position: relative;
-    row-gap: 8px;
+    row-gap: 1.54vh;
     font-weight: 700;
-    margin-bottom: 24px;
+    margin-bottom: 1.05vh;
 }
 
 .login-input input[type='file'] {
     border: none;
+    padding: 0;
 }
 
 .login-input input {
-    padding: 8px 10px;
+    padding: 1.92vh 1.25vw;
     font-size: 14px;
     border-radius: 4px;
     background-color: transparent;
@@ -102,7 +107,8 @@ article {
 }
 
 .login-input textarea {
-    height: 180px;
+    padding: 2.3vh 0.68vw;
+    height: 26.78vh;
     background-color: transparent;
     border-radius: 4px;
     border: 1px solid #000000;
@@ -120,7 +126,7 @@ article {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin-top: 24px;
+    margin-top: 2.5vh;
 }
 
 .buttons button {
