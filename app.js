@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const app = express()
-const PORT = 3000
+const PORT = 4000
 
 // static page
 app.use('/styles', express.static(path.join(__dirname, 'styles')))
@@ -35,7 +35,8 @@ app.get('/make_post', (req, res) => {
     res.sendFile(path.join(__dirname, 'templates', 'make_post.html'))
 })
 
-app.get('/post', (req, res) => {
+app.get('/posts/:id', (req, res) => {
+    const postId = req.params.id
     res.sendFile(path.join(__dirname, 'templates', 'post.html'))
 })
 

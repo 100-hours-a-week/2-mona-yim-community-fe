@@ -1,9 +1,8 @@
 export const usernameHelper = async (username) => {
     const result = fetch(
-        // test server
-        `https://49b079ca-d797-4d96-a59e-bcb0f7741967.mock.pstmn.io/users/username/check?username=${username}`,
+        `http://localhost:3000/users/username/check?username=${username}`,
         {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -15,9 +14,9 @@ export const usernameHelper = async (username) => {
 export const emailHelper = async (email) => {
     const result = fetch(
         // test server
-        `https://49b079ca-d797-4d96-a59e-bcb0f7741967.mock.pstmn.io/users/email/check?email=${email}`,
+        `http://localhost:3000/users/email/check?email=${email}`,
         {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -27,15 +26,12 @@ export const emailHelper = async (email) => {
 }
 
 export const signinHelper = async (userinfo) => {
-    const result = fetch(
-        `https://49b079ca-d797-4d96-a59e-bcb0f7741967.mock.pstmn.io/users/signin`,
-        {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(userinfo),
-        }
-    )
+    const result = fetch(`http://localhost:3000/users/signin`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userinfo),
+    })
     return result
 }

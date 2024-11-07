@@ -80,7 +80,7 @@ function handleConfirmModal() {
 }
 
 async function fetchPostInfo() {
-    const postId = 1
+    const postId = 2
     const responsePost = await postHelper(postId)
     createPost(await responsePost.json())
     const responseComment = await commentsHelper(postId)

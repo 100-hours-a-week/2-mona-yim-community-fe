@@ -13,15 +13,12 @@ export const postsHelper = async () => {
 }
 
 export const postHelper = async (postId) => {
-    const result = await fetch(
-        `https://49b079ca-d797-4d96-a59e-bcb0f7741967.mock.pstmn.io/posts/${postId}`,
-        {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        }
-    )
+    const result = await fetch(`http://localhost:3000/posts/${postId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
     return result
 }
 
