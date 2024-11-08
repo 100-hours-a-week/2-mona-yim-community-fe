@@ -31,13 +31,7 @@ async function fetchPosts() {
     const response = await postsHelper() // userId 고쳐넣기
     const posts = await response.json()
 
-    const postArray = await Promise.all(
-        posts.map(async (post) => {
-            const postResponse = await postHelper(post.postId)
-            return postResponse.json()
-        })
-    )
-    postArray.forEach((postData) => createPosts(postData))
+    posts.forEach((postData) => createPosts(postData))
 }
 
 function createPosts(postData) {
@@ -85,7 +79,7 @@ function createPosts(postData) {
     postContainer.appendChild(writerDiv)
 
     postContainer.addEventListener('click', () => {
-        window.location.href = `/post/${postData.postId}`
+        window.location.href = `/posts/${postData.postId}`
     })
 
     postsContainer.appendChild(postContainer)

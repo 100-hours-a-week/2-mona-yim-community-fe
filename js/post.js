@@ -80,7 +80,8 @@ function handleConfirmModal() {
 }
 
 async function fetchPostInfo() {
-    const postId = 2
+    const pathParts = window.location.pathname.split('/')
+    const postId = pathParts[pathParts.length - 1]
     const responsePost = await postHelper(postId)
     createPost(await responsePost.json())
     const responseComment = await commentsHelper(postId)
