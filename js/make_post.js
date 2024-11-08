@@ -1,4 +1,5 @@
 import { postUploadHelper } from '../api/postsRequest.js'
+import { formatDate } from '../utils/function.js'
 
 document.getElementById('subject').addEventListener('input', handleSubmit)
 document.getElementById('content').addEventListener('input', handleSubmit)
@@ -24,10 +25,16 @@ async function handleSubmit(event) {
         } else {
             const postData = {
                 title: `${subjectValue}`,
-                content: `${contentValue}`,
+                username: '니누',
+                time: `${formatDate()}`,
+                likes: 0,
+                comments: 0,
+                views: 0,
                 postImage: '',
+                postContent: `${contentValue}`,
             }
             const response = await postUploadHelper(postData)
+            window.location.href = '/posts'
         }
     }
 }

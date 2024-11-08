@@ -20,7 +20,7 @@ export const postHelper = async (postId) => {
 
 export const commentsHelper = async (postId) => {
     const result = await fetch(
-        `https://49b079ca-d797-4d96-a59e-bcb0f7741967.mock.pstmn.io/posts/${postId}/comments`,
+        `http://localhost:3000/posts/${postId}/comments`,
         {
             method: 'GET',
             headers: {
@@ -31,30 +31,75 @@ export const commentsHelper = async (postId) => {
     return result
 }
 
-export const postUploadHelper = async (postData) => {
+export const commentUploadHelper = async (postId, commentData) => {
     const result = await fetch(
-        `https://49b079ca-d797-4d96-a59e-bcb0f7741967.mock.pstmn.io/posts`,
+        `http://localhost:3000/posts/${postId}/comments`,
         {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(postData),
+            body: JSON.stringify(commentData),
         }
     )
     return result
 }
 
-export const reUploadHelper = async (postId, postData) => {
+export const commentReuploadHelper = async (postId, commentId, commentData) => {
     const result = await fetch(
-        `https://49b079ca-d797-4d96-a59e-bcb0f7741967.mock.pstmn.io/posts/${postId}`,
+        `http://localhost:3000/posts/${postId}/comments/${commentId}`,
         {
-            method: 'POST',
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(postData),
+            body: JSON.stringify(commentData),
         }
     )
+    return result
+}
+
+export const commentDeleteHelper = async (postId, commentId) => {
+    const result = await fetch(
+        `http://localhost:3000/posts/${postId}/comments/${commentId}`,
+        {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }
+    )
+    return result
+}
+
+export const postUploadHelper = async (postData) => {
+    const result = await fetch(`http://localhost:3000/posts`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(postData),
+    })
+    return result
+}
+
+export const reUploadHelper = async (postId, postData) => {
+    const result = await fetch(`http://localhost:3000/posts/${postId}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(postData),
+    })
+    return result
+}
+
+export const postDeleteHelper = async (postId) => {
+    const result = await fetch(`http://localhost:3000/posts/${postId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
     return result
 }

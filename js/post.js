@@ -1,14 +1,28 @@
-import { postHelper, commentsHelper } from '../api/postsRequest.js'
+import {
+    postHelper,
+    commentsHelper,
+    postDeleteHelper,
+    commentUploadHelper,
+    commentReuploadHelper,
+    commentDeleteHelper,
+} from '../api/postsRequest.js'
+
+import { formatDate } from '../utils/function.js'
 
 document.addEventListener('DOMContentLoaded', fetchPostInfo)
 document.getElementById('edit-button').addEventListener('click', handleEdit)
 document.getElementById('delete-button').addEventListener('click', handleDelete)
 document.getElementById('comment-text').addEventListener('input', handleComment)
+document
+    .getElementById('comment-upload')
+    .addEventListener('click', handleCommentUpload)
 document.getElementById('cancel').addEventListener('click', handleCancelModal)
 document.getElementById('confirm').addEventListener('click', handleConfirmModal)
 
 function handleEdit() {
-    window.location.href = '/edit_post'
+    const pathParts = window.location.pathname.split('/')
+    const postId = pathParts[pathParts.length - 1]
+    window.location.href = `/posts/${postId}/edit_post`
 }
 
 function handleDelete() {
@@ -31,6 +45,40 @@ function handleComment() {
     }
 }
 
+async function handleCommentUpload() {
+    const pathParts = window.location.pathname.split('/')
+    const postId = pathParts[pathParts.length - 1]
+    const commentInput = document.getElementById('comment-text')
+    const commentValue = commentInput.value
+    const actionType = document.getElementById('comment-upload').dataset.action
+    if (commentValue) {
+        // 댓글 생성
+        if (actionType === 'upload') {
+            const commentData = {
+                username: '니누',
+                time: `${formatDate()}`,
+                content: `${commentValue}`,
+            }
+            const response = await commentUploadHelper(postId, commentData)
+        }
+        // 댓글 수정
+        else {
+            const commentData = {
+                content: `${commentValue}`,
+            }
+            const commentId =
+                document.getElementById('comment-upload').dataset.id
+            const response = await commentReuploadHelper(
+                postId,
+                commentId,
+                commentData
+            )
+            document.getElementById('comment-text').dataset.action = 'upload'
+        }
+        window.location.href = `/posts/${postId}`
+    }
+}
+
 function formatCount(count) {
     if (count >= 1000) {
         const formattedCount = Math.floor(count / 1000) + 'k'
@@ -39,27 +87,39 @@ function formatCount(count) {
     return count
 }
 
-document.querySelectorAll('.edit-button').forEach((button) => {
-    button.addEventListener('click', (event) => {
+const commentsContainer = document.querySelector('.comments')
+
+commentsContainer.addEventListener('click', (event) => {
+    // 수정 버튼 클릭 시
+    if (event.target.closest('.modify')) {
+        const commentId = event.target.dataset.id
+        document
+            .getElementById('comment-upload')
+            .setAttribute('data-id', commentId)
         const commentContainer =
             event.target.closest('.comment-info').nextElementSibling
         const commentText =
             commentContainer.querySelector('.comment-content').textContent
+        document.getElementById('comment-upload').dataset.action = 'edit'
 
-        // .textContent 대신 .value 사용
+        // 텍스트 박스에 댓글 내용 설정
         document.getElementById('comment-text').value = commentText
         document.getElementById('comment-upload').textContent = '댓글 수정'
-    })
-})
+    }
 
-document.querySelectorAll('.delete-comment').forEach((button) => {
-    button.addEventListener('click', (event) => {
+    // 삭제 버튼 클릭 시
+    if (event.target.closest('.delete')) {
+        const commentId = event.target.dataset.id
         const modal = document.getElementById('modal')
         const modalTitle = document.querySelector('#modal .modal-content h2')
         modalTitle.textContent = '댓글을 삭제하시겠습니까?'
+        document.getElementById('confirm').dataset.action = 'comment'
+        document.getElementById('confirm').dataset.id = commentId
+
+        // 모달 열기 및 스크롤 비활성화
         document.body.style.overflow = 'hidden'
         modal.style.display = 'flex'
-    })
+    }
 })
 
 function handleCancelModal() {
@@ -75,8 +135,24 @@ document.getElementById('modal').addEventListener('click', (event) => {
     }
 })
 
-function handleConfirmModal() {
-    // 확인 버튼 클릭 시 동작 (추가 구현 가능)
+async function handleConfirmModal() {
+    const actionType = document.getElementById('confirm').dataset.action
+    // 게시글 삭제
+    if (actionType === 'post') {
+        const pathParts = window.location.pathname.split('/')
+        const postId = pathParts[pathParts.length - 1]
+        const response = await postDeleteHelper(postId)
+        window.location.href = '/posts'
+    }
+    // 댓글 삭제
+    else {
+        const pathParts = window.location.pathname.split('/')
+        const postId = pathParts[pathParts.length - 1]
+        const commentId = document.getElementById('confirm').dataset.id
+        document.getElementById('confirm').dataset.action = 'comment'
+        const response = await commentDeleteHelper(postId, commentId)
+        window.location.href = `/posts/${postId}`
+    }
 }
 
 async function fetchPostInfo() {
@@ -108,7 +184,6 @@ function createPost(postData) {
 }
 
 function createComment(commentData) {
-    console.log(commentData)
     const commentsContainer = document.querySelector('.comments')
 
     const commentInfoDiv = document.createElement('div')
@@ -131,6 +206,7 @@ function createComment(commentData) {
     modifyDiv.classList.add('modify')
     const editButton = document.createElement('button')
     editButton.textContent = '수정'
+    editButton.setAttribute('data-id', commentData.commentId)
     modifyDiv.appendChild(editButton)
 
     //삭제버튼
@@ -138,6 +214,7 @@ function createComment(commentData) {
     deleteDiv.classList.add('delete')
     const deleteButton = document.createElement('button')
     deleteButton.textContent = '삭제'
+    deleteButton.setAttribute('data-id', commentData.commentId)
     deleteDiv.appendChild(deleteButton)
 
     commentInfoDiv.appendChild(profileImage)
@@ -148,6 +225,7 @@ function createComment(commentData) {
 
     const commentDiv = document.createElement('div')
     commentDiv.classList.add('comment')
+    commentDiv.setAttribute('data-id', commentData.commentId)
 
     const commentContent = document.createElement('p')
     commentContent.classList.add('comment-content')

@@ -23,7 +23,8 @@ app.get('/edit_password', (req, res) => {
     res.sendFile(path.join(__dirname, 'templates', 'edit_password.html'))
 })
 
-app.get('/edit_post', (req, res) => {
+app.get('/posts/:id/edit_post', (req, res) => {
+    const postId = req.params.id
     res.sendFile(path.join(__dirname, 'templates', 'edit_post.html'))
 })
 

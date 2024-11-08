@@ -50,7 +50,11 @@
                         placeholder="댓글을 남겨주세요!"
                     ></textarea>
                     <div>
-                        <button id="comment-upload" class="comment-upload">
+                        <button
+                            id="comment-upload"
+                            data-action="upload"
+                            class="comment-upload"
+                        >
                             댓글 등록
                         </button>
                     </div>
@@ -64,7 +68,13 @@
                 <p>삭제한 내용은 복구 할 수 없습니다.</p>
                 <div class="modal-buttons">
                     <button id="cancel" class="modal-b-black">취소</button>
-                    <button id="confirm" class="modal-b-purple">확인</button>
+                    <button
+                        id="confirm"
+                        data-action="post"
+                        class="modal-b-purple"
+                    >
+                        확인
+                    </button>
                 </div>
             </div>
         </div>

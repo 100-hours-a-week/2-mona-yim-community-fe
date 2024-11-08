@@ -1,11 +1,13 @@
 import { postHelper, reUploadHelper } from '../api/postsRequest.js'
 
 document.addEventListener('DOMContentLoaded', fetchPostInfo)
-document.getElementById('edit').addEventListener('click', handlepostEdit)
+document.getElementById('edit').addEventListener('click', handlePostEdit)
 
 async function fetchPostInfo() {
-    const postId = 1
+    const pathParts = window.location.pathname.split('/')
+    const postId = pathParts[pathParts.length - 2]
     const responsePost = await postHelper(postId)
+    console.log(responsePost)
     editPost(await responsePost.json())
 }
 
@@ -16,10 +18,10 @@ function editPost(postData) {
     const content = document.getElementById('content')
     content.textContent = postData.postContent
 
-    const postImage = document.getElementById('content')
+    // const postImage = document.getElementById('content')
 }
 
-async function handlepostEdit() {
+async function handlePostEdit() {
     // 게시글이 수정되고, 해당 게시글 상세보기로 이동
     // 밑에 안 확실 다시 확인
     const subject = document.getElementById('subject').value
@@ -28,11 +30,12 @@ async function handlepostEdit() {
 
     const postData = {
         title: subject,
-        content: content,
         postImage: postImage,
+        postContent: content,
     }
-    const postId = 1
+    const pathParts = window.location.pathname.split('/')
+    const postId = pathParts[pathParts.length - 2]
     const response = await reUploadHelper(postId, postData)
 
-    window.location.href = '/post'
+    window.location.href = `/posts/${postId}`
 }
