@@ -11,6 +11,8 @@ async function handleSubmit(event) {
     const contentInput = document.getElementById('content')
     const contentValue = contentInput.value
     const submitButton = document.getElementById('submit')
+    const postImageInput = document.getElementById('post_image')
+    const postImageValue = postImageInput.files[0]
 
     if (subjectValue && contentValue) {
         submitButton.style.backgroundColor = '#7F6AEE'
@@ -24,14 +26,11 @@ async function handleSubmit(event) {
                 '*제목, 내용을 모두 작성해주세요'
         } else {
             const postData = {
-                title: `${subjectValue}`,
-                username: '니누',
-                time: `${formatDate()}`,
-                likes: 0,
-                comments: 0,
-                views: 0,
-                postImage: '',
-                postContent: `${contentValue}`,
+                title: subjectValue,
+                username: '',
+                time: formatDate(),
+                postImage: postImageValue,
+                postContent: contentValue,
             }
             const response = await postUploadHelper(postData)
             window.location.href = '/posts'

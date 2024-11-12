@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'templates', 'login.html'))
 })
 
-app.get('/edit_password', (req, res) => {
+app.get('/users/password', (req, res) => {
     res.sendFile(path.join(__dirname, 'templates', 'edit_password.html'))
 })
 
@@ -28,7 +28,7 @@ app.get('/posts/:id/edit_post', (req, res) => {
     res.sendFile(path.join(__dirname, 'templates', 'edit_post.html'))
 })
 
-app.get('/edit_profile', (req, res) => {
+app.get('/users/profile', (req, res) => {
     res.sendFile(path.join(__dirname, 'templates', 'edit_profile.html'))
 })
 

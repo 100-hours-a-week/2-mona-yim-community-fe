@@ -1,4 +1,5 @@
 import { validPassword } from '../utils/function.js'
+import { passwordHelper } from '../api/loginRequest.js'
 
 document.getElementById('pw').addEventListener('input', validatePassword)
 document.getElementById('pwcheck').addEventListener('input', validateSame)
@@ -69,8 +70,13 @@ function showToast() {
     }, 500)
 }
 
-function handleEdit() {
+async function handleEdit() {
+    const passwordInput = document.getElementById('pw')
+    const passwordValue = passwordInput.value
+
     if (validatePassword() && validateSame()) {
+        const userId = 3
+        const deleteResponse = await passwordHelper(userId, passwordValue)
         showToast()
     }
 }

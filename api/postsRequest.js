@@ -73,13 +73,24 @@ export const commentDeleteHelper = async (postId, commentId) => {
 }
 
 export const postUploadHelper = async (postData) => {
-    const result = await fetch(`http://localhost:3000/posts`, {
+    const formData = new FormData()
+
+    formData.append('title', postData.title)
+    formData.append('username', postData.username)
+    formData.append('time', postData.time)
+    formData.append('likes', 0)
+    formData.append('comments', 0)
+    formData.append('views', 0)
+    if (postData.postImage) {
+        formData.append('postImage', postData.postImage) // 파일 추가
+    }
+    formData.append('postContent', postData.postContent)
+
+    const result = await fetch('http://localhost:3000/posts', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(postData),
+        body: formData,
     })
+
     return result
 }
 

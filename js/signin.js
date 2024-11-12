@@ -25,17 +25,19 @@ const userInfo = {
     email: '',
     password: '',
     username: '',
-    profileImage: '',
+    profileImage: null,
 }
 
 function handleProfile() {
     const profileInput = document.getElementById('profile')
-    const profileValue = profileInput.value
-    userInfo.profileImage = profileValue
+    const profileValue = profileInput.files[0]
 
     if (profileValue) {
+        userInfo.profileImage = profileValue
+        console.log(profileValue)
         document.getElementById('helper-profile').textContent = ''
     } else {
+        userInfo.profileImage = ''
         document.getElementById('helper-profile').textContent =
             '*프로필 사진을 추가해주세요.'
     }

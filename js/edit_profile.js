@@ -1,4 +1,5 @@
 import { usernameHelper } from '../api/signinRequest.js'
+import { profileHelper } from '../api/loginRequest.js'
 
 document
     .getElementById('edit-button')
@@ -23,6 +24,8 @@ async function handleprofileEdit() {
     } else {
         const response = await usernameHelper(usernameValue)
         if (response.status === 200) {
+            const userId = 3
+            const editResponse = await profileHelper(userId, usernameValue)
             document.getElementById('helper-username').textContent = ''
             showToast()
         } else {
