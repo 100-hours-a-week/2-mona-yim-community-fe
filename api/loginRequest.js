@@ -41,3 +41,13 @@ export const passwordHelper = async (userId, password) => {
     })
     return result
 }
+
+export const userHelper = async (userId) => {
+    const result = await fetch(`http://localhost:3000/users/${userId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    return await result.json()
+}

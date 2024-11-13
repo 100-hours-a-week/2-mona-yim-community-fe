@@ -7,6 +7,8 @@ import {
     commentDeleteHelper,
 } from '../api/postsRequest.js'
 
+import { userHelper } from '../api/loginRequest.js'
+
 import { formatDate } from '../utils/function.js'
 
 document.addEventListener('DOMContentLoaded', fetchPostInfo)
@@ -165,13 +167,21 @@ async function fetchPostInfo() {
     responseCommentArray.forEach((commentData) => createComment(commentData))
 }
 
-function createPost(postData) {
+async function createPost(postData) {
+    // api 수정 후 구현하기
+    // const userId = postData.userId;
+    const userData = await userHelper(3) // temp userId = 2
+    console.log(userData)
+    document.querySelector('.info .author').textContent = userData.username
+    console.log(`http://localhost:3000/images/${userData.profileImage}`)
+    document.getElementById('userProfileImage').src = userData.profileImage
+        ? `http://localhost:3000/images/${userData.profileImage}`
+        : '/assets/profile_image.jpg'
     document.querySelector('.title h2').textContent = postData.title
-    document.querySelector('.info .author').textContent = postData.username
     document.querySelector('.info .time').textContent = postData.time
     document.querySelector('.contents img').src = postData.postImage
         ? `http://localhost:3000/images/${postData.postImage}`
-        : ''
+        : '/assets/profile_image.jpg'
     document.querySelector('.contents p').textContent = postData.postContent
     document.getElementById('likes').innerHTML = `${formatCount(
         postData.likes
@@ -184,7 +194,10 @@ function createPost(postData) {
     )} <br />댓글`
 }
 
-function createComment(commentData) {
+async function createComment(commentData) {
+    // api 수정 후 구현하기
+    // const userId = commentData.commentId
+    const userData = await userHelper(1) // temp comment author = 2
     const commentsContainer = document.querySelector('.comments')
 
     const commentInfoDiv = document.createElement('div')
@@ -192,11 +205,13 @@ function createComment(commentData) {
 
     const profileImage = document.createElement('img')
     profileImage.classList.add('profile')
-    profileImage.src = '/assets/profile_image.jpg'
+    profileImage.src = userData.profileImage
+        ? `http://localhost:3000/images/${userData.profileImage}`
+        : '/assets/profile_image.jpg'
 
     const commentUsername = document.createElement('b')
     commentUsername.classList.add('author')
-    commentUsername.textContent = commentData.username
+    commentUsername.textContent = userData.username
 
     const commentTime = document.createElement('p')
     commentTime.classList.add('time')
