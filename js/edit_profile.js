@@ -1,5 +1,6 @@
 import { usernameHelper } from '../api/signinRequest.js'
 import { profileHelper } from '../api/loginRequest.js'
+import { signoutHelper } from '../api/signinRequest.js'
 
 document
     .getElementById('edit-button')
@@ -14,6 +15,8 @@ document
 async function handleprofileEdit() {
     const usernameInput = document.getElementById('username')
     const usernameValue = usernameInput.value
+    const profileImageInput = document.getElementById('profile')
+    const profileImageValue = profileImageInput.files[0]
 
     if (!usernameValue) {
         document.getElementById('helper-username').textContent =
@@ -25,7 +28,11 @@ async function handleprofileEdit() {
         const response = await usernameHelper(usernameValue)
         if (response.status === 200) {
             const userId = 3
-            const editResponse = await profileHelper(userId, usernameValue)
+            const editResponse = await profileHelper(
+                userId,
+                usernameValue,
+                profileImageValue
+            )
             document.getElementById('helper-username').textContent = ''
             showToast()
         } else {
@@ -56,8 +63,10 @@ function handleCancelModal() {
     modal.style.display = 'none'
 }
 
-function handleConfirmModal() {
+async function handleConfirmModal() {
     // 계정 삭제
+    const userId = 4
+    const response = await signoutHelper(userId)
     window.location.href = '/'
 }
 

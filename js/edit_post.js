@@ -18,7 +18,11 @@ function editPost(postData) {
     const content = document.getElementById('content')
     content.textContent = postData.postContent
 
-    // const postImage = document.getElementById('content')
+    const postImage = document.getElementById('post_image')
+    console.log(postData.postImage)
+    if (postData.postImage) {
+        postImage.value = `/images/${postData.postImage}`
+    }
 }
 
 async function handlePostEdit() {
@@ -26,7 +30,7 @@ async function handlePostEdit() {
     // 밑에 안 확실 다시 확인
     const subject = document.getElementById('subject').value
     const content = document.getElementById('content').value
-    const postImage = document.getElementById('content').src
+    const postImage = document.getElementById('post_image').files[0]
 
     const postData = {
         title: subject,

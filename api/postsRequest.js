@@ -95,12 +95,17 @@ export const postUploadHelper = async (postData) => {
 }
 
 export const reUploadHelper = async (postId, postData) => {
+    const formData = new FormData()
+
+    formData.append('title', postData.title)
+    formData.append('postContent', postData.postContent)
+    if (postData.postImage) {
+        formData.append('postImage', postData.postImage) // 파일 추가
+    }
+
     const result = await fetch(`http://localhost:3000/posts/${postId}`, {
         method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(postData),
+        body: formData,
     })
     return result
 }

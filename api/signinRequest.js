@@ -13,7 +13,6 @@ export const usernameHelper = async (username) => {
 
 export const emailHelper = async (email) => {
     const result = fetch(
-        // test server
         `http://localhost:3000/users/email/check?email=${email}`,
         {
             method: 'POST',
@@ -41,5 +40,18 @@ export const signinHelper = async (userinfo) => {
         body: formData,
     })
 
+    return result
+}
+
+export const signoutHelper = async (userId) => {
+    const result = fetch(`http://localhost:3000/users/delete`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            userId: userId,
+        }),
+    })
     return result
 }

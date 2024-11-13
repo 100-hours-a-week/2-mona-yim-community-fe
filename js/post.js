@@ -169,8 +169,9 @@ function createPost(postData) {
     document.querySelector('.title h2').textContent = postData.title
     document.querySelector('.info .author').textContent = postData.username
     document.querySelector('.info .time').textContent = postData.time
-    document.querySelector('.contents img').src =
-        '/assets/post_photo.jpeg' || postData.postImage
+    document.querySelector('.contents img').src = postData.postImage
+        ? `http://localhost:3000/images/${postData.postImage}`
+        : ''
     document.querySelector('.contents p').textContent = postData.postContent
     document.getElementById('likes').innerHTML = `${formatCount(
         postData.likes

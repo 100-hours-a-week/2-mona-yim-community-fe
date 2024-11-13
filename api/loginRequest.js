@@ -12,16 +12,18 @@ export const loginHelper = async (email, password) => {
     return result
 }
 
-export const profileHelper = async (userId, username) => {
+export const profileHelper = async (userId, username, profileImage) => {
+    const formData = new FormData()
+
+    formData.append('userId', userId)
+    formData.append('username', username)
+    formData.append('profileImage', profileImage)
+
+    console.log(formData)
+
     const result = await fetch('http://localhost:3000/users/profile', {
         method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            userId: userId,
-            username: username,
-        }),
+        body: formData,
     })
     return result
 }
