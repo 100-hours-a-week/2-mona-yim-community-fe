@@ -76,7 +76,7 @@ export const postUploadHelper = async (postData) => {
     const formData = new FormData()
 
     formData.append('title', postData.title)
-    formData.append('username', postData.username)
+    formData.append('userId', postData.userId)
     formData.append('time', postData.time)
     formData.append('likes', 0)
     formData.append('comments', 0)

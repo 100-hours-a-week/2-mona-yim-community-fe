@@ -57,7 +57,7 @@ async function handleCommentUpload() {
         // 댓글 생성
         if (actionType === 'upload') {
             const commentData = {
-                username: '니누',
+                userId: 1,
                 time: `${formatDate()}`,
                 content: `${commentValue}`,
             }
@@ -170,10 +170,9 @@ async function fetchPostInfo() {
 async function createPost(postData) {
     // api 수정 후 구현하기
     // const userId = postData.userId;
-    const userData = await userHelper(3) // temp userId = 2
+    const userData = await userHelper(postData.userId) // temp userId = 2
     console.log(userData)
     document.querySelector('.info .author').textContent = userData.username
-    console.log(`http://localhost:3000/images/${userData.profileImage}`)
     document.getElementById('userProfileImage').src = userData.profileImage
         ? `http://localhost:3000/images/${userData.profileImage}`
         : '/assets/profile_image.jpg'
@@ -181,7 +180,7 @@ async function createPost(postData) {
     document.querySelector('.info .time').textContent = postData.time
     document.querySelector('.contents img').src = postData.postImage
         ? `http://localhost:3000/images/${postData.postImage}`
-        : '/assets/profile_image.jpg'
+        : ''
     document.querySelector('.contents p').textContent = postData.postContent
     document.getElementById('likes').innerHTML = `${formatCount(
         postData.likes

@@ -27,7 +27,7 @@ async function handleSubmit(event) {
         } else {
             const postData = {
                 title: subjectValue,
-                username: '',
+                userId: 1,
                 time: formatDate(),
                 postImage: postImageValue,
                 postContent: contentValue,

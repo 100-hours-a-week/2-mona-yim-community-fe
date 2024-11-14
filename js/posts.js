@@ -1,3 +1,4 @@
+import { userHelper } from '../api/loginRequest.js'
 import { postsHelper, postHelper } from '../api/postsRequest.js'
 
 document.addEventListener('DOMContentLoaded', fetchPosts)
@@ -34,7 +35,8 @@ async function fetchPosts() {
     posts.forEach((postData) => createPosts(postData))
 }
 
-function createPosts(postData) {
+async function createPosts(postData) {
+    const userData = await userHelper(postData.userId)
     const postsContainer = document.getElementById('posts-container')
     const postContainer = document.createElement('div')
     postContainer.classList.add('post-container')
@@ -69,10 +71,12 @@ function createPosts(postData) {
     writerDiv.classList.add('writer')
     const profileImg = document.createElement('img')
     profileImg.classList.add('profile')
-    profileImg.src = postData.profileImageUrl || '/assets/profile_image.jpg'
+    profileImg.src = userData.profileImage
+        ? `http://localhost:3000/images/${userData.profileImage}`
+        : '/assets/profile_image.jpg'
     const name = document.createElement('p')
     name.classList.add('name')
-    name.textContent = postData.username
+    name.textContent = userData.username
     writerDiv.appendChild(profileImg)
     writerDiv.appendChild(name)
 
