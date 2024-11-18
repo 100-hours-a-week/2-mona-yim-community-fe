@@ -119,3 +119,41 @@ export const postDeleteHelper = async (postId) => {
     })
     return result
 }
+
+export const likeStatus = async (postId) => {
+    const result = await fetch(`http://localhost:3000/posts/${postId}/like`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    return result.json()
+}
+
+export const likeHelper = async (likeData) => {
+    const result = await fetch(
+        `http://localhost:3000/posts/${likeData.postId}/like`,
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(likeData),
+        }
+    )
+    return result.json()
+}
+
+export const unlikeHelper = async (likeData) => {
+    const result = await fetch(
+        `http://localhost:3000/posts/${likeData.postId}/unlike`,
+        {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(likeData),
+        }
+    )
+    return result.json()
+}
