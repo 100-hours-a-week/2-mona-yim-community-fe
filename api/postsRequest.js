@@ -4,6 +4,7 @@ export const postsHelper = async () => {
         headers: {
             'Content-Type': 'application/json',
         },
+        credentials: 'include',
     })
     return result
 }
@@ -94,13 +95,13 @@ export const postUploadHelper = async (postData) => {
     return result
 }
 
-export const reUploadHelper = async (postId, postData) => {
+export const reUploadHelper = async (postId, title, postContent, postImage) => {
     const formData = new FormData()
 
-    formData.append('title', postData.title)
-    formData.append('postContent', postData.postContent)
+    formData.append('title', title)
+    formData.append('postContent', postContent)
     if (postData.postImage) {
-        formData.append('postImage', postData.postImage) // 파일 추가
+        formData.append('postImage', postImage) // 파일 추가
     }
 
     const result = await fetch(`http://localhost:3000/posts/${postId}`, {

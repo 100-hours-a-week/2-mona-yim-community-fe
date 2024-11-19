@@ -44,13 +44,14 @@ async function handleLogin() {
     if (validateEmail() && validatePassword()) {
         loginButton.style.backgroundColor = '#7F6AEE'
         const response = await loginHelper(emailValue, passwordValue)
+
         if (response.status !== 200) {
             document.getElementById('helper').textContent =
                 '*비밀번호가 다릅니다.'
         } else {
             document.getElementById('helper').textContent = ''
             const result = await response.json()
-            window.location.href = '/posts' // 지우기
+            window.location.href = '/posts'
         }
     } else {
         loginButton.style.backgroundColor = '#ACA0EB'

@@ -1,18 +1,14 @@
 import { validPassword } from '../utils/function.js'
 import { passwordHelper } from '../api/loginRequest.js'
+import { initializeDropdown, initializeProfile } from './initialize.js'
 
 document.getElementById('pw').addEventListener('input', validatePassword)
 document.getElementById('pwcheck').addEventListener('input', validateSame)
 document.getElementById('edit').addEventListener('click', handleEdit)
-document
-    .getElementById('profile-photo')
-    .addEventListener('click', handleDropdown)
 
 function validatePassword() {
-    const passwordInput = document.getElementById('pw')
-    const passwordValue = passwordInput.value
-    const passwordCheckInput = document.getElementById('pwcheck')
-    const passwordCheckValue = passwordCheckInput.value
+    const passwordValue = document.getElementById('pw').value
+    const passwordCheckValue = document.getElementById('pwcheck').value
 
     if (!passwordValue) {
         document.getElementById('helper-pw').textContent =
@@ -33,10 +29,8 @@ function validatePassword() {
 }
 
 function validateSame() {
-    const passwordInput = document.getElementById('pw')
-    const passwordValue = passwordInput.value
-    const passwordCheckInput = document.getElementById('pwcheck')
-    const passwordCheckValue = passwordCheckInput.value
+    const passwordValue = document.getElementById('pw').value
+    const passwordCheckValue = document.getElementById('pwcheck').value
 
     if (!passwordValue) {
         document.getElementById('helper-pwcheck').textContent =
@@ -74,8 +68,7 @@ function showToast() {
 }
 
 async function handleEdit() {
-    const passwordInput = document.getElementById('pw')
-    const passwordValue = passwordInput.value
+    const passwordValue = document.getElementById('pw').value
 
     if (validatePassword() && validateSame()) {
         const userId = 3
@@ -84,29 +77,5 @@ async function handleEdit() {
     }
 }
 
-function handleDropdown() {
-    const dropdown = document.getElementById('dropdown')
-    dropdown.style.display = 'flex'
-}
-
-document.querySelectorAll('.dropdown p').forEach((p) => {
-    p.addEventListener('mouseover', () => {
-        p.style.backgroundColor = '#E9E9E9'
-    })
-
-    p.addEventListener('mouseout', () => {
-        p.style.backgroundColor = '' // 원래 배경색으로 되돌림
-    })
-
-    p.addEventListener('click', () => {
-        if (p.textContent == '회원정보 수정') {
-            window.location.href = '/edit_profile'
-        }
-        if (p.textContent == '비밀번호 수정') {
-            window.location.href = '/edit_password'
-        }
-        if (p.textContent == '로그아웃') {
-            window.location.href = '/'
-        }
-    })
-})
+initializeProfile()
+initializeDropdown()

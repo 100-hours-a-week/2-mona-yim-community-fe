@@ -14,6 +14,8 @@ import { userHelper } from '../api/loginRequest.js'
 
 import { formatDate } from '../utils/function.js'
 
+import { initializeDropdown, initializeProfile } from './initialize.js'
+
 document.addEventListener('DOMContentLoaded', fetchPostInfo)
 document.getElementById('edit-button').addEventListener('click', handleEdit)
 document.getElementById('delete-button').addEventListener('click', handleDelete)
@@ -53,7 +55,7 @@ function handleComment() {
 
 async function handleCommentUpload() {
     const pathParts = window.location.pathname.split('/')
-    const postId = pathParts[pathParts.length - 1]
+    const postId = Number(pathParts[pathParts.length - 1])
     const commentInput = document.getElementById('comment-text')
     const commentValue = commentInput.value
     const actionType = document.getElementById('comment-upload').dataset.action
@@ -61,6 +63,7 @@ async function handleCommentUpload() {
         // 댓글 생성
         if (actionType === 'upload') {
             const commentData = {
+                postId: postId,
                 userId: 1,
                 time: `${formatDate()}`,
                 content: `${commentValue}`,
@@ -175,7 +178,6 @@ async function createPost(postData) {
     // api 수정 후 구현하기
     // const userId = postData.userId;
     const userData = await userHelper(postData.userId) // temp userId = 2
-    console.log(userData)
     document.querySelector('.info .author').textContent = userData.username
     document.getElementById('userProfileImage').src = userData.profileImage
         ? `http://localhost:3000/images/${userData.profileImage}`
@@ -200,7 +202,7 @@ async function createPost(postData) {
 async function createComment(commentData) {
     // api 수정 후 구현하기
     // const userId = commentData.commentId
-    const userData = await userHelper(1) // temp comment author = 2
+    const userData = await userHelper(commentData.userId) // temp comment author = 2
     const commentsContainer = document.querySelector('.comments')
 
     const commentInfoDiv = document.createElement('div')
@@ -255,37 +257,6 @@ async function createComment(commentData) {
     commentsContainer.appendChild(commentDiv)
 }
 
-document
-    .getElementById('profile-photo')
-    .addEventListener('click', handleDropdown)
-
-function handleDropdown() {
-    const dropdown = document.getElementById('dropdown')
-    dropdown.style.display = 'flex'
-}
-
-document.querySelectorAll('.dropdown p').forEach((p) => {
-    p.addEventListener('mouseover', () => {
-        p.style.backgroundColor = '#E9E9E9'
-    })
-
-    p.addEventListener('mouseout', () => {
-        p.style.backgroundColor = '' // 원래 배경색으로 되돌림
-    })
-
-    p.addEventListener('click', () => {
-        if (p.textContent == '회원정보 수정') {
-            window.location.href = '/edit_profile'
-        }
-        if (p.textContent == '비밀번호 수정') {
-            window.location.href = '/edit_password'
-        }
-        if (p.textContent == '로그아웃') {
-            window.location.href = '/'
-        }
-    })
-})
-
 async function handleLike() {
     const pathParts = window.location.pathname.split('/')
     const postId = Number(pathParts[pathParts.length - 1])
@@ -306,3 +277,6 @@ async function handleLike() {
         response.likes
     )} <br />좋아요수`
 }
+
+initializeProfile()
+initializeDropdown()

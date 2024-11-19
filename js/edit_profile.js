@@ -1,16 +1,26 @@
 import { usernameHelper } from '../api/signinRequest.js'
-import { profileHelper } from '../api/loginRequest.js'
+import { profileHelper, userHelper } from '../api/loginRequest.js'
 import { signoutHelper } from '../api/signinRequest.js'
+import { initializeDropdown, initializeProfile } from './initialize.js'
 
+document.addEventListener('DOMContentLoaded', fetchUserInfo)
 document
     .getElementById('edit-button')
     .addEventListener('click', handleprofileEdit)
 document.getElementById('deleteAccount').addEventListener('click', handleModal)
 document.getElementById('cancel').addEventListener('click', handleCancelModal)
 document.getElementById('confirm').addEventListener('click', handleConfirmModal)
-document
-    .getElementById('profile-photo')
-    .addEventListener('click', handleDropdown)
+
+async function fetchUserInfo() {
+    const userId = 4 //temp
+    const response = await userHelper(4)
+    console.log(response)
+    document.getElementById('user-email').textContent = `${response.email}`
+    document.getElementById('username').value = `${response.username}`
+    document.getElementById('user-image').src = response.profileImage
+        ? `http://localhost:3000/images/${response.profileImage}`
+        : '/assets/profile_image.jpg'
+}
 
 async function handleprofileEdit() {
     const usernameInput = document.getElementById('username')
@@ -70,33 +80,9 @@ async function handleConfirmModal() {
     window.location.href = '/'
 }
 
-function handleDropdown() {
-    const dropdown = document.getElementById('dropdown')
-    dropdown.style.display = 'flex'
-}
-
-document.querySelectorAll('.dropdown p').forEach((p) => {
-    p.addEventListener('mouseover', () => {
-        p.style.backgroundColor = '#E9E9E9'
-    })
-
-    p.addEventListener('mouseout', () => {
-        p.style.backgroundColor = '' // 원래 배경색으로 되돌림
-    })
-
-    p.addEventListener('click', () => {
-        if (p.textContent == '회원정보 수정') {
-            window.location.href = '/edit_profile'
-        }
-        if (p.textContent == '비밀번호 수정') {
-            window.location.href = '/edit_password'
-        }
-        if (p.textContent == '로그아웃') {
-            window.location.href = '/'
-        }
-    })
-})
-
 document.getElementById('profileContainer').addEventListener('click', () => {
     document.getElementById('profile').click()
 })
+
+initializeProfile()
+initializeDropdown()
