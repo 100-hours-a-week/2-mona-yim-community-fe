@@ -1,4 +1,4 @@
-import { userHelper } from '../api/loginRequest.js'
+import { selfHelper } from '../api/loginRequest.js'
 
 export function initializeDropdown() {
     document
@@ -36,8 +36,7 @@ export function initializeProfile() {
 }
 
 async function handleProfilePhoto() {
-    const userId = 1 //temp
-    const userData = await userHelper(userId)
+    const userData = await selfHelper()
     document.getElementById('profile-photo').src = userData.profileImage
         ? `http://localhost:3000/images/${userData.profileImage}`
         : '/assets/profile_image.jpg'

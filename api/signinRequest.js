@@ -3,6 +3,7 @@ export const usernameHelper = async (username) => {
         `http://localhost:3000/users/username/check?username=${username}`,
         {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -16,6 +17,7 @@ export const emailHelper = async (email) => {
         `http://localhost:3000/users/email/check?email=${email}`,
         {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -37,21 +39,20 @@ export const signinHelper = async (userinfo) => {
 
     const result = await fetch(`http://localhost:3000/signin`, {
         method: 'POST',
+        credentials: 'include',
         body: formData,
     })
 
     return result
 }
 
-export const signoutHelper = async (userId) => {
+export const signoutHelper = async () => {
     const result = fetch(`http://localhost:3000/users/delete`, {
         method: 'DELETE',
+        credentials: 'include',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-            userId: userId,
-        }),
     })
     return result
 }

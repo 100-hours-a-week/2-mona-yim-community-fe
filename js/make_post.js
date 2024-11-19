@@ -26,14 +26,12 @@ async function handleSubmit(event) {
             document.getElementById('helper-submit').textContent =
                 '*제목, 내용을 모두 작성해주세요'
         } else {
-            const postData = {
-                title: subjectValue,
-                userId: 1,
-                time: formatDate(),
-                postImage: postImageValue,
-                postContent: contentValue,
-            }
-            const response = await postUploadHelper(postData)
+            const response = await postUploadHelper(
+                subjectValue,
+                formatDate(),
+                postImageValue,
+                contentValue
+            )
             window.location.href = '/posts'
         }
     }

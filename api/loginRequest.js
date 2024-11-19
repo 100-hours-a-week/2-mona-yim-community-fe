@@ -1,6 +1,7 @@
 export const loginHelper = async (email, password) => {
     const result = await fetch('http://localhost:3000/', {
         method: 'POST',
+        credentials: 'include',
         headers: {
             'Content-Type': 'application/json',
         },
@@ -12,30 +13,28 @@ export const loginHelper = async (email, password) => {
     return result
 }
 
-export const profileHelper = async (userId, username, profileImage) => {
+export const profileHelper = async (username, profileImage) => {
     const formData = new FormData()
 
-    formData.append('userId', userId)
     formData.append('username', username)
     formData.append('profileImage', profileImage)
 
-    console.log(formData)
-
     const result = await fetch('http://localhost:3000/users/profile', {
         method: 'PATCH',
+        credentials: 'include',
         body: formData,
     })
     return result
 }
 
-export const passwordHelper = async (userId, password) => {
+export const passwordHelper = async (password) => {
     const result = await fetch('http://localhost:3000/users/password', {
         method: 'PATCH',
+        credentials: 'include',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            userId: userId,
             password: password,
         }),
     })
@@ -45,6 +44,18 @@ export const passwordHelper = async (userId, password) => {
 export const userHelper = async (userId) => {
     const result = await fetch(`http://localhost:3000/users/${userId}`, {
         method: 'GET',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    return await result.json()
+}
+
+export const selfHelper = async () => {
+    const result = await fetch(`http://localhost:3000/users/me`, {
+        method: 'GET',
+        credentials: 'include',
         headers: {
             'Content-Type': 'application/json',
         },

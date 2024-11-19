@@ -62,13 +62,11 @@ async function handleCommentUpload() {
     if (commentValue) {
         // 댓글 생성
         if (actionType === 'upload') {
-            const commentData = {
-                postId: postId,
-                userId: 1,
-                time: `${formatDate()}`,
-                content: `${commentValue}`,
-            }
-            const response = await commentUploadHelper(postId, commentData)
+            const response = await commentUploadHelper(
+                postId,
+                formatDate(),
+                commentValue
+            )
         }
         // 댓글 수정
         else {
@@ -175,9 +173,7 @@ async function fetchPostInfo() {
 }
 
 async function createPost(postData) {
-    // api 수정 후 구현하기
-    // const userId = postData.userId;
-    const userData = await userHelper(postData.userId) // temp userId = 2
+    const userData = await userHelper(postData.userId)
     document.querySelector('.info .author').textContent = userData.username
     document.getElementById('userProfileImage').src = userData.profileImage
         ? `http://localhost:3000/images/${userData.profileImage}`
@@ -200,9 +196,7 @@ async function createPost(postData) {
 }
 
 async function createComment(commentData) {
-    // api 수정 후 구현하기
-    // const userId = commentData.commentId
-    const userData = await userHelper(commentData.userId) // temp comment author = 2
+    const userData = await userHelper(commentData.userId)
     const commentsContainer = document.querySelector('.comments')
 
     const commentInfoDiv = document.createElement('div')
@@ -261,17 +255,12 @@ async function handleLike() {
     const pathParts = window.location.pathname.split('/')
     const postId = Number(pathParts[pathParts.length - 1])
 
-    const likeData = {
-        postId: postId,
-        userId: 1,
-    }
-
     const statusResponse = await likeStatus(postId)
     let response
     if (statusResponse.liked) {
-        response = await unlikeHelper(likeData)
+        response = await unlikeHelper(postId)
     } else {
-        response = await likeHelper(likeData)
+        response = await likeHelper(postId)
     }
     document.getElementById('likes').innerHTML = `${formatCount(
         response.likes

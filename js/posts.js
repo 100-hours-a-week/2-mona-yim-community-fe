@@ -1,5 +1,5 @@
 import { userHelper } from '../api/loginRequest.js'
-import { postsHelper, postHelper } from '../api/postsRequest.js'
+import { postsHelper } from '../api/postsRequest.js'
 import { initializeDropdown, initializeProfile } from './initialize.js'
 
 document.addEventListener('DOMContentLoaded', fetchPosts)
@@ -30,7 +30,7 @@ function formatCount(count) {
 }
 
 async function fetchPosts() {
-    const response = await postsHelper() // userId 고쳐넣기
+    const response = await postsHelper()
     const posts = await response.json()
 
     posts.forEach((postData) => createPosts(postData))

@@ -71,8 +71,7 @@ async function handleEdit() {
     const passwordValue = document.getElementById('pw').value
 
     if (validatePassword() && validateSame()) {
-        const userId = 3
-        const deleteResponse = await passwordHelper(userId, passwordValue)
+        const deleteResponse = await passwordHelper(passwordValue)
         showToast()
     }
 }

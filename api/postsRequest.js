@@ -1,10 +1,10 @@
 export const postsHelper = async () => {
     const result = await fetch('http://localhost:3000/posts', {
         method: 'GET',
+        credentials: 'include',
         headers: {
             'Content-Type': 'application/json',
         },
-        credentials: 'include',
     })
     return result
 }
@@ -12,6 +12,7 @@ export const postsHelper = async () => {
 export const postHelper = async (postId) => {
     const result = await fetch(`http://localhost:3000/posts/${postId}`, {
         method: 'GET',
+        credentials: 'include',
         headers: {
             'Content-Type': 'application/json',
         },
@@ -24,6 +25,7 @@ export const commentsHelper = async (postId) => {
         `http://localhost:3000/posts/${postId}/comments`,
         {
             method: 'GET',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -32,15 +34,21 @@ export const commentsHelper = async (postId) => {
     return result
 }
 
-export const commentUploadHelper = async (postId, commentData) => {
+export const commentUploadHelper = async (postId, time, content) => {
     const result = await fetch(
         `http://localhost:3000/posts/${postId}/comments`,
         {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(commentData),
+            body: JSON.stringify({
+                postId: postId,
+                userId: 0,
+                time: time,
+                content: content,
+            }),
         }
     )
     return result
@@ -51,6 +59,7 @@ export const commentReuploadHelper = async (postId, commentId, commentData) => {
         `http://localhost:3000/posts/${postId}/comments/${commentId}`,
         {
             method: 'PATCH',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -65,6 +74,7 @@ export const commentDeleteHelper = async (postId, commentId) => {
         `http://localhost:3000/posts/${postId}/comments/${commentId}`,
         {
             method: 'DELETE',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -73,22 +83,24 @@ export const commentDeleteHelper = async (postId, commentId) => {
     return result
 }
 
-export const postUploadHelper = async (postData) => {
+export const postUploadHelper = async (title, time, postImage, postContent) => {
     const formData = new FormData()
 
-    formData.append('title', postData.title)
-    formData.append('userId', postData.userId)
-    formData.append('time', postData.time)
+    formData.append('title', title)
+    formData.append('userId', 0)
+    formData.append('time', time)
     formData.append('likes', 0)
     formData.append('comments', 0)
     formData.append('views', 0)
-    if (postData.postImage) {
-        formData.append('postImage', postData.postImage) // 파일 추가
+
+    if (postImage) {
+        formData.append('postImage', postImage) // 파일 추가
     }
-    formData.append('postContent', postData.postContent)
+    formData.append('postContent', postContent)
 
     const result = await fetch('http://localhost:3000/posts', {
         method: 'POST',
+        credentials: 'include',
         body: formData,
     })
 
@@ -106,6 +118,7 @@ export const reUploadHelper = async (postId, title, postContent, postImage) => {
 
     const result = await fetch(`http://localhost:3000/posts/${postId}`, {
         method: 'PATCH',
+        credentials: 'include',
         body: formData,
     })
     return result
@@ -114,6 +127,7 @@ export const reUploadHelper = async (postId, title, postContent, postImage) => {
 export const postDeleteHelper = async (postId) => {
     const result = await fetch(`http://localhost:3000/posts/${postId}`, {
         method: 'DELETE',
+        credentials: 'include',
         headers: {
             'Content-Type': 'application/json',
         },
@@ -124,6 +138,7 @@ export const postDeleteHelper = async (postId) => {
 export const likeStatus = async (postId) => {
     const result = await fetch(`http://localhost:3000/posts/${postId}/like`, {
         method: 'GET',
+        credentials: 'include',
         headers: {
             'Content-Type': 'application/json',
         },
@@ -131,30 +146,24 @@ export const likeStatus = async (postId) => {
     return result.json()
 }
 
-export const likeHelper = async (likeData) => {
-    const result = await fetch(
-        `http://localhost:3000/posts/${likeData.postId}/like`,
-        {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(likeData),
-        }
-    )
+export const likeHelper = async (postId) => {
+    const result = await fetch(`http://localhost:3000/posts/${postId}/like`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
     return result.json()
 }
 
-export const unlikeHelper = async (likeData) => {
-    const result = await fetch(
-        `http://localhost:3000/posts/${likeData.postId}/unlike`,
-        {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(likeData),
-        }
-    )
+export const unlikeHelper = async (postId) => {
+    const result = await fetch(`http://localhost:3000/posts/${postId}/unlike`, {
+        method: 'DELETE',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
     return result.json()
 }

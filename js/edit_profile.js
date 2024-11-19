@@ -1,5 +1,5 @@
 import { usernameHelper } from '../api/signinRequest.js'
-import { profileHelper, userHelper } from '../api/loginRequest.js'
+import { profileHelper, selfHelper } from '../api/loginRequest.js'
 import { signoutHelper } from '../api/signinRequest.js'
 import { initializeDropdown, initializeProfile } from './initialize.js'
 
@@ -12,9 +12,7 @@ document.getElementById('cancel').addEventListener('click', handleCancelModal)
 document.getElementById('confirm').addEventListener('click', handleConfirmModal)
 
 async function fetchUserInfo() {
-    const userId = 4 //temp
-    const response = await userHelper(4)
-    console.log(response)
+    const response = await selfHelper()
     document.getElementById('user-email').textContent = `${response.email}`
     document.getElementById('username').value = `${response.username}`
     document.getElementById('user-image').src = response.profileImage
@@ -23,10 +21,8 @@ async function fetchUserInfo() {
 }
 
 async function handleprofileEdit() {
-    const usernameInput = document.getElementById('username')
-    const usernameValue = usernameInput.value
-    const profileImageInput = document.getElementById('profile')
-    const profileImageValue = profileImageInput.files[0]
+    const usernameValue = document.getElementById('username').value
+    const profileImageValue = document.getElementById('profile').files[0]
 
     if (!usernameValue) {
         document.getElementById('helper-username').textContent =
@@ -37,9 +33,7 @@ async function handleprofileEdit() {
     } else {
         const response = await usernameHelper(usernameValue)
         if (response.status === 200) {
-            const userId = 3
             const editResponse = await profileHelper(
-                userId,
                 usernameValue,
                 profileImageValue
             )
@@ -75,8 +69,7 @@ function handleCancelModal() {
 
 async function handleConfirmModal() {
     // 계정 삭제
-    const userId = 4
-    const response = await signoutHelper(userId)
+    const response = await signoutHelper()
     window.location.href = '/'
 }
 
