@@ -1,5 +1,7 @@
+const clientURL = 'http://localhost:3000/'
+
 export const loginHelper = async (email, password) => {
-    const result = await fetch('http://localhost:3000/', {
+    const result = await fetch('http://localhost:13306/', {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -19,7 +21,7 @@ export const profileHelper = async (username, profileImage) => {
     formData.append('username', username)
     formData.append('profileImage', profileImage)
 
-    const result = await fetch('http://localhost:3000/users/profile', {
+    const result = await fetch('http://localhost:13306/users/profile', {
         method: 'PATCH',
         credentials: 'include',
         body: formData,
@@ -28,7 +30,7 @@ export const profileHelper = async (username, profileImage) => {
 }
 
 export const passwordHelper = async (password) => {
-    const result = await fetch('http://localhost:3000/users/password', {
+    const result = await fetch('http://localhost:13306/users/password', {
         method: 'PATCH',
         credentials: 'include',
         headers: {
@@ -42,7 +44,7 @@ export const passwordHelper = async (password) => {
 }
 
 export const userHelper = async (userId) => {
-    const result = await fetch(`http://localhost:3000/users/${userId}`, {
+    const result = await fetch(`http://localhost:13306/users/${userId}`, {
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -53,7 +55,7 @@ export const userHelper = async (userId) => {
 }
 
 export const selfHelper = async () => {
-    const result = await fetch(`http://localhost:3000/users/me`, {
+    const result = await fetch(`http://localhost:13306/users/me`, {
         method: 'GET',
         credentials: 'include',
         headers: {

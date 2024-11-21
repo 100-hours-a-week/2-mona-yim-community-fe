@@ -1,6 +1,6 @@
 export const usernameHelper = async (username) => {
     const result = fetch(
-        `http://localhost:3000/users/username/check?username=${username}`,
+        `http://localhost:13306/users/username/check?username=${username}`,
         {
             method: 'POST',
             credentials: 'include',
@@ -14,7 +14,7 @@ export const usernameHelper = async (username) => {
 
 export const emailHelper = async (email) => {
     const result = fetch(
-        `http://localhost:3000/users/email/check?email=${email}`,
+        `http://localhost:13306/users/email/check?email=${email}`,
         {
             method: 'POST',
             credentials: 'include',
@@ -37,7 +37,7 @@ export const signinHelper = async (userinfo) => {
         formData.append('profileImage', userinfo.profileImage) // 파일 추가
     }
 
-    const result = await fetch(`http://localhost:3000/signin`, {
+    const result = await fetch(`http://localhost:13306/signin`, {
         method: 'POST',
         credentials: 'include',
         body: formData,
@@ -47,7 +47,7 @@ export const signinHelper = async (userinfo) => {
 }
 
 export const signoutHelper = async () => {
-    const result = fetch(`http://localhost:3000/users/delete`, {
+    const result = fetch(`http://localhost:13306/users/delete`, {
         method: 'DELETE',
         credentials: 'include',
         headers: {

@@ -73,7 +73,7 @@ async function createPosts(postData) {
     const profileImg = document.createElement('img')
     profileImg.classList.add('profile')
     profileImg.src = userData.profileImage
-        ? `http://localhost:3000/images/${userData.profileImage}`
+        ? `http://localhost:13306/images/${userData.profileImage}`
         : '/assets/profile_image.jpg'
     const name = document.createElement('p')
     name.classList.add('name')

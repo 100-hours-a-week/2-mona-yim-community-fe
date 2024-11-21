@@ -176,12 +176,12 @@ async function createPost(postData) {
     const userData = await userHelper(postData.userId)
     document.querySelector('.info .author').textContent = userData.username
     document.getElementById('userProfileImage').src = userData.profileImage
-        ? `http://localhost:3000/images/${userData.profileImage}`
+        ? `http://localhost:13306/images/${userData.profileImage}`
         : '/assets/profile_image.jpg'
     document.querySelector('.title h2').textContent = postData.title
     document.querySelector('.info .time').textContent = postData.time
     document.querySelector('.contents img').src = postData.postImage
-        ? `http://localhost:3000/images/${postData.postImage}`
+        ? `http://localhost:13306/images/${postData.postImage}`
         : ''
     document.querySelector('.contents p').textContent = postData.postContent
     document.getElementById('likes').innerHTML = `${formatCount(
@@ -205,7 +205,7 @@ async function createComment(commentData) {
     const profileImage = document.createElement('img')
     profileImage.classList.add('profile')
     profileImage.src = userData.profileImage
-        ? `http://localhost:3000/images/${userData.profileImage}`
+        ? `http://localhost:13306/images/${userData.profileImage}`
         : '/assets/profile_image.jpg'
 
     const commentUsername = document.createElement('b')
