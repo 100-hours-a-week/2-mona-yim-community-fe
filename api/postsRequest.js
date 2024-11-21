@@ -1,5 +1,7 @@
+const serverPORT = 'http://localhost:13306'
+
 export const postsHelper = async () => {
-    const result = await fetch('http://localhost:13306/posts', {
+    const result = await fetch(`${serverPORT}/posts`, {
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -10,7 +12,7 @@ export const postsHelper = async () => {
 }
 
 export const postHelper = async (postId) => {
-    const result = await fetch(`http://localhost:13306/posts/${postId}`, {
+    const result = await fetch(`${serverPORT}/posts/${postId}`, {
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -21,42 +23,35 @@ export const postHelper = async (postId) => {
 }
 
 export const commentsHelper = async (postId) => {
-    const result = await fetch(
-        `http://localhost:13306/posts/${postId}/comments`,
-        {
-            method: 'GET',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        }
-    )
+    const result = await fetch(`${serverPORT}/posts/${postId}/comments`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
     return result
 }
 
 export const commentUploadHelper = async (postId, time, content) => {
-    const result = await fetch(
-        `http://localhost:13306/posts/${postId}/comments`,
-        {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                postId: postId,
-                userId: 0,
-                time: time,
-                content: content,
-            }),
-        }
-    )
+    const result = await fetch(`${serverPORT}/posts/${postId}/comments`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            userId: 0,
+            time: time,
+            content: content,
+        }),
+    })
     return result
 }
 
 export const commentReuploadHelper = async (postId, commentId, commentData) => {
     const result = await fetch(
-        `http://localhost:13306/posts/${postId}/comments/${commentId}`,
+        `${serverPORT}/posts/${postId}/comments/${commentId}`,
         {
             method: 'PATCH',
             credentials: 'include',
@@ -71,7 +66,7 @@ export const commentReuploadHelper = async (postId, commentId, commentData) => {
 
 export const commentDeleteHelper = async (postId, commentId) => {
     const result = await fetch(
-        `http://localhost:13306/posts/${postId}/comments/${commentId}`,
+        `${serverPORT}/posts/${postId}/comments/${commentId}`,
         {
             method: 'DELETE',
             credentials: 'include',
@@ -94,7 +89,7 @@ export const postUploadHelper = async (title, time, postImage, postContent) => {
     }
     formData.append('postContent', postContent)
 
-    const result = await fetch('http://localhost:13306/posts', {
+    const result = await fetch(`${serverPORT}/posts`, {
         method: 'POST',
         credentials: 'include',
         body: formData,
@@ -112,7 +107,7 @@ export const reUploadHelper = async (postId, title, postContent, postImage) => {
         formData.append('postImage', postImage) // 파일 추가
     }
 
-    const result = await fetch(`http://localhost:13306/posts/${postId}`, {
+    const result = await fetch(`${serverPORT}/posts/${postId}`, {
         method: 'PATCH',
         credentials: 'include',
         body: formData,
@@ -121,7 +116,7 @@ export const reUploadHelper = async (postId, title, postContent, postImage) => {
 }
 
 export const postDeleteHelper = async (postId) => {
-    const result = await fetch(`http://localhost:13306/posts/${postId}`, {
+    const result = await fetch(`${serverPORT}/posts/${postId}`, {
         method: 'DELETE',
         credentials: 'include',
         headers: {
@@ -132,7 +127,7 @@ export const postDeleteHelper = async (postId) => {
 }
 
 export const likeStatus = async (postId) => {
-    const result = await fetch(`http://localhost:13306/posts/${postId}/like`, {
+    const result = await fetch(`${serverPORT}/posts/${postId}/like`, {
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -143,7 +138,7 @@ export const likeStatus = async (postId) => {
 }
 
 export const likeHelper = async (postId) => {
-    const result = await fetch(`http://localhost:13306/posts/${postId}/like`, {
+    const result = await fetch(`${serverPORT}/posts/${postId}/like`, {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -154,15 +149,12 @@ export const likeHelper = async (postId) => {
 }
 
 export const unlikeHelper = async (postId) => {
-    const result = await fetch(
-        `http://localhost:13306/posts/${postId}/unlike`,
-        {
-            method: 'DELETE',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        }
-    )
+    const result = await fetch(`${serverPORT}/posts/${postId}/unlike`, {
+        method: 'DELETE',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
     return result.json()
 }

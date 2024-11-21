@@ -1,7 +1,7 @@
-const clientURL = 'http://localhost:3000/'
+const serverPORT = 'http://localhost:13306'
 
 export const loginHelper = async (email, password) => {
-    const result = await fetch('http://localhost:13306/', {
+    const result = await fetch(`${serverPORT}/`, {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -15,13 +15,24 @@ export const loginHelper = async (email, password) => {
     return result
 }
 
+export const logoutHelper = async () => {
+    const result = await fetch(`${serverPORT}/logout`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    return result
+}
+
 export const profileHelper = async (username, profileImage) => {
     const formData = new FormData()
 
     formData.append('username', username)
     formData.append('profileImage', profileImage)
 
-    const result = await fetch('http://localhost:13306/users/profile', {
+    const result = await fetch(`${serverPORT}/users/profile`, {
         method: 'PATCH',
         credentials: 'include',
         body: formData,
@@ -30,7 +41,7 @@ export const profileHelper = async (username, profileImage) => {
 }
 
 export const passwordHelper = async (password) => {
-    const result = await fetch('http://localhost:13306/users/password', {
+    const result = await fetch(`${serverPORT}/users/password`, {
         method: 'PATCH',
         credentials: 'include',
         headers: {
@@ -44,7 +55,7 @@ export const passwordHelper = async (password) => {
 }
 
 export const userHelper = async (userId) => {
-    const result = await fetch(`http://localhost:13306/users/${userId}`, {
+    const result = await fetch(`${serverPORT}/users/${userId}`, {
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -55,7 +66,7 @@ export const userHelper = async (userId) => {
 }
 
 export const selfHelper = async () => {
-    const result = await fetch(`http://localhost:13306/users/me`, {
+    const result = await fetch(`${serverPORT}/users/me`, {
         method: 'GET',
         credentials: 'include',
         headers: {

@@ -1,4 +1,4 @@
-import { selfHelper } from '../api/loginRequest.js'
+import { logoutHelper, selfHelper } from '../api/loginRequest.js'
 
 export function initializeDropdown() {
     document
@@ -20,6 +20,7 @@ export function initializeDropdown() {
             } else if (p.textContent === '비밀번호 수정') {
                 window.location.href = '/users/password'
             } else if (p.textContent === '로그아웃') {
+                logoutHelper()
                 window.location.href = '/'
             }
         })

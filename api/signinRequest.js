@@ -1,6 +1,8 @@
+const serverPORT = 'http://localhost:13306'
+
 export const usernameHelper = async (username) => {
     const result = fetch(
-        `http://localhost:13306/users/username/check?username=${username}`,
+        `${serverPORT}/users/username/check?username=${username}`,
         {
             method: 'POST',
             credentials: 'include',
@@ -13,16 +15,13 @@ export const usernameHelper = async (username) => {
 }
 
 export const emailHelper = async (email) => {
-    const result = fetch(
-        `http://localhost:13306/users/email/check?email=${email}`,
-        {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        }
-    )
+    const result = fetch(`${serverPORT}/users/email/check?email=${email}`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
     return result
 }
 
@@ -37,7 +36,7 @@ export const signinHelper = async (userinfo) => {
         formData.append('profileImage', userinfo.profileImage) // 파일 추가
     }
 
-    const result = await fetch(`http://localhost:13306/signin`, {
+    const result = await fetch(`${serverPORT}/signin`, {
         method: 'POST',
         credentials: 'include',
         body: formData,
@@ -47,7 +46,7 @@ export const signinHelper = async (userinfo) => {
 }
 
 export const signoutHelper = async () => {
-    const result = fetch(`http://localhost:13306/users/delete`, {
+    const result = fetch(`${serverPORT}/users/delete`, {
         method: 'DELETE',
         credentials: 'include',
         headers: {
