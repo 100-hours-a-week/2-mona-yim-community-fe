@@ -34,7 +34,21 @@ function handleProfile() {
 
     if (profileValue) {
         userInfo.profileImage = profileValue
-        console.log(profileValue)
+
+        const reader = new FileReader()
+        reader.onload = function (event) {
+            const imageURL = event.target.result
+            // 업로드한 이미지를 #circle의 배경으로 설정
+            document.getElementById(
+                'circle'
+            ).style.backgroundImage = `url(${imageURL})`
+            document.getElementById('circle').style.backgroundSize = 'cover' // 이미지 크기를 채우기 위해 설정
+            document.getElementById('circle').style.backgroundPosition =
+                'center' // 이미지 중앙 정렬
+        }
+
+        reader.readAsDataURL(profileValue)
+        document.getElementById('plus-sign').textContent = ''
         document.getElementById('helper-profile').textContent = ''
     } else {
         userInfo.profileImage = ''
