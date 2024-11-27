@@ -179,7 +179,20 @@ async function createPost(postData) {
         ? `http://localhost:13306/images/${userData.profileImage}`
         : '/assets/profile_image.jpg'
     document.querySelector('.title h2').textContent = postData.title
-    document.querySelector('.info .time').textContent = postData.time
+
+    // 날짜 형식 변경
+    const date = new Date(postData.time)
+    const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1)
+        .toString()
+        .padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} ${date
+        .getHours()
+        .toString()
+        .padStart(2, '0')}:${date
+        .getMinutes()
+        .toString()
+        .padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`
+
+    document.querySelector('.info .time').textContent = formattedDate
     document.querySelector('.contents img').src = postData.postImage
         ? `http://localhost:13306/images/${postData.postImage}`
         : ''
