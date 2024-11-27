@@ -18,6 +18,23 @@ async function fetchUserInfo() {
     document.getElementById('user-image').src = response.profileImage
         ? `http://localhost:13306/images/${response.profileImage}`
         : '/assets/profile_image.jpg'
+
+    const profileInput = document.getElementById('profile')
+    const profileContainer = document.getElementById('profileContainer')
+
+    profileInput.addEventListener('change', function (event) {
+        const file = event.target.files[0]
+        if (file) {
+            const reader = new FileReader()
+
+            reader.onload = function (e) {
+                const imageURL = e.target.result
+                document.getElementById('user-image').src = imageURL
+            }
+
+            reader.readAsDataURL(file)
+        }
+    })
 }
 
 async function handleprofileEdit() {
