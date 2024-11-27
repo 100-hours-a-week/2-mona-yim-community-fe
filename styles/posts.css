@@ -108,7 +108,6 @@ article {
     display: flex;
     justify-content: flex-end;
     width: 100%;
-    max-width: 360px;
     padding-bottom: 3.55vh;
 }
 

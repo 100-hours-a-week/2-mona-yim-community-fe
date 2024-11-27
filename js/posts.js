@@ -50,6 +50,18 @@ async function createPosts(postData) {
     // 정보
     const infoDiv = document.createElement('div')
     infoDiv.classList.add('info')
+    // 날짜 형식 변경
+    const date = new Date(postData.time)
+    const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1)
+        .toString()
+        .padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} ${date
+        .getHours()
+        .toString()
+        .padStart(2, '0')}:${date
+        .getMinutes()
+        .toString()
+        .padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`
+
     infoDiv.innerHTML = `<p class="likes">좋아요 ${formatCount(
         postData.likes
     )}</p>
@@ -59,7 +71,7 @@ async function createPosts(postData) {
                         <p class="views">조회수 ${formatCount(
                             postData.views
                         )}</p>
-                        <p class="time">${postData.time}</p>`
+                        <p class="time">${formattedDate}</p>`
 
     postContainer.appendChild(infoDiv)
 
