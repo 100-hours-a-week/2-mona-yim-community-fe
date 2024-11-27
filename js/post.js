@@ -227,7 +227,17 @@ async function createComment(commentData) {
 
     const commentTime = document.createElement('p')
     commentTime.classList.add('time')
-    commentTime.textContent = commentData.time
+    const date = new Date(commentData.time)
+    const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1)
+        .toString()
+        .padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} ${date
+        .getHours()
+        .toString()
+        .padStart(2, '0')}:${date
+        .getMinutes()
+        .toString()
+        .padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`
+    commentTime.textContent = formattedDate
 
     //수정버튼
     const modifyDiv = document.createElement('div')
