@@ -1,4 +1,4 @@
-const serverPORT = 'http://localhost:13306'
+const serverPORT = 'http://localhost:3000/api'
 
 export const postsHelper = async () => {
     const result = await fetch(`${serverPORT}/posts`, {

@@ -39,6 +39,6 @@ export function initializeProfile() {
 async function handleProfilePhoto() {
     const userData = await selfHelper()
     document.getElementById('profile-photo').src = userData.profileImage
-        ? `http://localhost:13306/images/${userData.profileImage}`
+        ? `http://localhost:3000/images/${userData.profileImage}`
         : '/assets/profile_image.jpg'
 }

@@ -16,11 +16,10 @@ async function fetchUserInfo() {
     document.getElementById('user-email').textContent = `${response.email}`
     document.getElementById('username').value = `${response.username}`
     document.getElementById('user-image').src = response.profileImage
-        ? `http://localhost:13306/images/${response.profileImage}`
+        ? `http://localhost:3000/images/${response.profileImage}`
         : '/assets/profile_image.jpg'
 
     const profileInput = document.getElementById('profile')
-    const profileContainer = document.getElementById('profileContainer')
 
     profileInput.addEventListener('change', function (event) {
         const file = event.target.files[0]

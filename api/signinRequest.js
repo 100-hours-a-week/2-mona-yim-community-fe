@@ -1,4 +1,4 @@
-const serverPORT = 'http://localhost:13306'
+const serverPORT = 'http://localhost:3000/api'
 
 export const usernameHelper = async (username) => {
     const result = fetch(
