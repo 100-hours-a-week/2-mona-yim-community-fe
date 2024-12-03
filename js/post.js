@@ -169,7 +169,9 @@ async function fetchPostInfo() {
     createPost(await responsePost.json())
     const responseComment = await commentsHelper(postId)
     const responseCommentArray = await responseComment.json()
-    responseCommentArray.forEach((commentData) => createComment(commentData))
+    for (const commentData of responseCommentArray) {
+        await createComment(commentData)
+    }
 }
 
 async function createPost(postData) {

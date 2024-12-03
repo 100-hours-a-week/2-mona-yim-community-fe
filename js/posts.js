@@ -33,7 +33,9 @@ async function fetchPosts() {
     const response = await postsHelper()
     const posts = await response.json()
 
-    posts.forEach((postData) => createPosts(postData))
+    for (const postData of posts) {
+        await createPosts(postData)
+    }
 }
 
 async function createPosts(postData) {
