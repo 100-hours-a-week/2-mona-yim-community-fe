@@ -36,9 +36,15 @@ export function initializeProfile() {
     document.addEventListener('DOMContentLoaded', handleProfilePhoto)
 }
 
+export function reloadProfile() {
+    handleProfilePhoto()
+}
+
 async function handleProfilePhoto() {
     const userData = await selfHelper()
-    document.getElementById('profile-photo').src = userData.profileImage
+    const profilePhotoElement = document.getElementById('profile-photo')
+    const profileImageUrl = userData.profileImage
         ? `http://localhost:3000/images/${userData.profileImage}`
         : '/assets/profile_image.jpg'
+    profilePhotoElement.src = profileImageUrl
 }

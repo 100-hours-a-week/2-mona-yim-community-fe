@@ -1,7 +1,11 @@
 import { usernameHelper } from '../api/signinRequest.js'
 import { profileHelper, selfHelper } from '../api/loginRequest.js'
 import { signoutHelper } from '../api/signinRequest.js'
-import { initializeDropdown, initializeProfile } from './initialize.js'
+import {
+    initializeDropdown,
+    initializeProfile,
+    reloadProfile,
+} from './initialize.js'
 
 document.addEventListener('DOMContentLoaded', fetchUserInfo)
 document
@@ -53,8 +57,11 @@ async function handleprofileEdit() {
                 usernameValue,
                 profileImageValue
             )
-            document.getElementById('helper-username').textContent = ''
-            showToast()
+            if (editResponse.status === 200) {
+                document.getElementById('helper-username').textContent = ''
+                reloadProfile()
+                showToast()
+            }
         } else {
             document.getElementById('helper-username').textContent =
                 '*중복된 닉네임 입니다.'
