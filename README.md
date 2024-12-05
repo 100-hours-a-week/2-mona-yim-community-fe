@@ -10,7 +10,7 @@
 ## 🖼️ **데모**
 
 ✨ 바로 확인해보세요!  
-[Demo](https://github.com/user-attachments/assets/0d39acbb-f1df-4ff3-8f2d-50f2fed2ae74)
+[Video](https://github.com/user-attachments/assets/0d39acbb-f1df-4ff3-8f2d-50f2fed2ae74)
 
 ---
 
