@@ -17,8 +17,6 @@ import { formatDate } from '../utils/function.js'
 import { initializeDropdown, initializeProfile } from './initialize.js'
 
 document.addEventListener('DOMContentLoaded', fetchPostInfo)
-document.getElementById('edit-button').addEventListener('click', handleEdit)
-document.getElementById('delete-button').addEventListener('click', handleDelete)
 document.getElementById('comment-text').addEventListener('input', handleComment)
 document
     .getElementById('comment-upload')
@@ -176,11 +174,44 @@ async function fetchPostInfo() {
 
 async function createPost(postData) {
     const userData = await userHelper(postData.userId)
+
+    const editButton = document.getElementById('edit-button')
+    const deleteButton = document.getElementById('delete-button')
+
     document.querySelector('.info .author').textContent = userData.username
     document.getElementById('userProfileImage').src = userData.profileImage
         ? `http://localhost:3000/images/${userData.profileImage}`
         : '/assets/profile_image.jpg'
     document.querySelector('.title h2').textContent = postData.title
+
+    if (Number(localStorage.getItem('userId')) === postData.userId) {
+        const infoDiv = document.querySelector('.info')
+
+        // 수정 버튼 생성
+        const modifyDiv = document.createElement('div')
+        modifyDiv.className = 'modify'
+
+        const editButton = document.createElement('button')
+        editButton.id = 'edit-button'
+        editButton.textContent = '수정'
+        modifyDiv.appendChild(editButton)
+
+        // 삭제 버튼 생성
+        const deleteDiv = document.createElement('div')
+        deleteDiv.className = 'delete'
+
+        const deleteButton = document.createElement('button')
+        deleteButton.id = 'delete-button'
+        deleteButton.textContent = '삭제'
+        deleteDiv.appendChild(deleteButton)
+
+        // 생성한 버튼을 infoDiv에 추가
+        infoDiv.appendChild(modifyDiv)
+        infoDiv.appendChild(deleteDiv)
+
+        editButton.addEventListener('click', handleEdit)
+        deleteButton.addEventListener('click', handleDelete)
+    }
 
     // 날짜 형식 변경
     const date = new Date(postData.time)
@@ -241,27 +272,30 @@ async function createComment(commentData) {
         .padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`
     commentTime.textContent = formattedDate
 
-    //수정버튼
-    const modifyDiv = document.createElement('div')
-    modifyDiv.classList.add('modify')
-    const editButton = document.createElement('button')
-    editButton.textContent = '수정'
-    editButton.setAttribute('data-id', commentData.commentId)
-    modifyDiv.appendChild(editButton)
-
-    //삭제버튼
-    const deleteDiv = document.createElement('div')
-    deleteDiv.classList.add('delete')
-    const deleteButton = document.createElement('button')
-    deleteButton.textContent = '삭제'
-    deleteButton.setAttribute('data-id', commentData.commentId)
-    deleteDiv.appendChild(deleteButton)
-
     commentInfoDiv.appendChild(profileImage)
     commentInfoDiv.appendChild(commentUsername)
     commentInfoDiv.appendChild(commentTime)
-    commentInfoDiv.appendChild(modifyDiv)
-    commentInfoDiv.appendChild(deleteDiv)
+
+    if (Number(localStorage.getItem('userId')) === commentData.userId) {
+        //수정버튼
+        const modifyDiv = document.createElement('div')
+        modifyDiv.classList.add('modify')
+        const editButton = document.createElement('button')
+        editButton.textContent = '수정'
+        editButton.setAttribute('data-id', commentData.commentId)
+        modifyDiv.appendChild(editButton)
+
+        //삭제버튼
+        const deleteDiv = document.createElement('div')
+        deleteDiv.classList.add('delete')
+        const deleteButton = document.createElement('button')
+        deleteButton.textContent = '삭제'
+        deleteButton.setAttribute('data-id', commentData.commentId)
+        deleteDiv.appendChild(deleteButton)
+
+        commentInfoDiv.appendChild(modifyDiv)
+        commentInfoDiv.appendChild(deleteDiv)
+    }
 
     const commentDiv = document.createElement('div')
     commentDiv.classList.add('comment')

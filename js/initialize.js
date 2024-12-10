@@ -21,6 +21,7 @@ export function initializeDropdown() {
                 window.location.href = '/users/password'
             } else if (p.textContent === '로그아웃') {
                 logoutHelper()
+                localStorage.clear()
                 window.location.href = '/'
             }
         })

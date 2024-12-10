@@ -51,6 +51,7 @@ async function handleLogin() {
         } else {
             document.getElementById('helper').textContent = ''
             const result = await response.json()
+            localStorage.setItem('userId', result.userId)
             window.location.href = '/posts'
         }
     } else {
