@@ -30,7 +30,11 @@ export function initializeDropdown() {
 
 function handleDropdown() {
     const dropdown = document.getElementById('dropdown')
-    dropdown.style.display = 'flex'
+    if (dropdown.style.display === 'flex') {
+        dropdown.style.display = 'none' // 숨기기
+    } else {
+        dropdown.style.display = 'flex' // 표시
+    }
 }
 
 export function initializeProfile() {
