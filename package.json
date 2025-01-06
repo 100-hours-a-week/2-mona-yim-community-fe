@@ -5,7 +5,12 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "pm2 start app.js --name frontend",
+        "stop": "pm2 stop frontend",
+        "restart": "pm2 restart frontend",
+        "status": "pm2 list",
+        "save": "pm2 save"
     },
     "keywords": [],
     "author": "",
@@ -13,5 +18,8 @@
     "dependencies": {
         "express": "^4.21.1",
         "mariadb": "^3.4.0"
+    },
+    "devDependencies": {
+        "pm2": "^5.4.3"
     }
 }

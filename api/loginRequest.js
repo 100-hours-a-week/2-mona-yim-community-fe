@@ -1,4 +1,4 @@
-const serverPORT = 'http://localhost:3000/api'
+const serverPORT = 'http://15.165.75.46:3000/api'
 
 export const loginHelper = async (email, password) => {
     const result = await fetch(`${serverPORT}/`, {

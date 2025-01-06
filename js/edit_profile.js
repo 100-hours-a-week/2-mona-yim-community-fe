@@ -1,6 +1,7 @@
 import { usernameHelper } from '../api/signinRequest.js'
 import { profileHelper, selfHelper } from '../api/loginRequest.js'
 import { signoutHelper } from '../api/signinRequest.js'
+import { myUrl } from './initialize.js'
 import {
     initializeDropdown,
     initializeProfile,
@@ -20,7 +21,7 @@ async function fetchUserInfo() {
     document.getElementById('user-email').textContent = `${response.email}`
     document.getElementById('username').value = `${response.username}`
     document.getElementById('user-image').src = response.profileImage
-        ? `http://localhost:3000/images/${response.profileImage}`
+        ? `${myUrl}/images/${response.profileImage}`
         : '/assets/profile_image.jpg'
 
     const profileInput = document.getElementById('profile')

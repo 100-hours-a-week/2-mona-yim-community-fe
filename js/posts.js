@@ -1,6 +1,7 @@
 import { userHelper } from '../api/loginRequest.js'
 import { postsHelper } from '../api/postsRequest.js'
 import { initializeDropdown, initializeProfile } from './initialize.js'
+import { myUrl } from './initialize.js'
 
 document.addEventListener('DOMContentLoaded', fetchPosts)
 document.getElementById('create').addEventListener('mouseover', handleHover)
@@ -18,7 +19,12 @@ function handleUnhover() {
 }
 
 function handleCreate() {
-    window.location.href = '/make_post'
+    if (!localStorage.getItem('userId')) {
+        alert('😻: 로그인이 필요합니다')
+    }
+    else {
+        window.location.href = '/make_post'
+    }
 }
 
 function formatCount(count) {
@@ -87,7 +93,7 @@ async function createPosts(postData) {
     const profileImg = document.createElement('img')
     profileImg.classList.add('profile')
     profileImg.src = userData.profileImage
-        ? `http://localhost:3000/images/${userData.profileImage}`
+        ? `${myUrl}/images/${userData.profileImage}`
         : '/assets/profile_image.jpg'
     const name = document.createElement('p')
     name.classList.add('name')

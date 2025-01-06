@@ -10,6 +10,8 @@ import {
     likeStatus,
 } from '../api/postsRequest.js'
 
+import { myUrl } from './initialize.js'
+
 import { userHelper } from '../api/loginRequest.js'
 
 import { formatDate } from '../utils/function.js'
@@ -60,11 +62,16 @@ async function handleCommentUpload() {
     if (commentValue) {
         // 댓글 생성
         if (actionType === 'upload') {
-            const response = await commentUploadHelper(
-                postId,
-                formatDate(),
-                commentValue
-            )
+            if (!localStorage.getItem('userId')) {
+                alert('😻: 로그인이 필요합니다')
+            }
+            else {
+                const response = await commentUploadHelper(
+                    postId,
+                    formatDate(),
+                    commentValue
+                )
+            }
         }
         // 댓글 수정
         else {
@@ -180,7 +187,7 @@ async function createPost(postData) {
 
     document.querySelector('.info .author').textContent = userData.username
     document.getElementById('userProfileImage').src = userData.profileImage
-        ? `http://localhost:3000/images/${userData.profileImage}`
+        ? `${myUrl}/images/${userData.profileImage}`
         : '/assets/profile_image.jpg'
     document.querySelector('.title h2').textContent = postData.title
 
@@ -227,7 +234,7 @@ async function createPost(postData) {
 
     document.querySelector('.info .time').textContent = formattedDate
     document.querySelector('.contents img').src = postData.postImage
-        ? `http://localhost:3000/images/${postData.postImage}`
+        ? `${myUrl}/images/${postData.postImage}`
         : ''
     document.querySelector('.contents p').textContent = postData.postContent
     document.getElementById('likes').innerHTML = `${formatCount(
@@ -251,7 +258,7 @@ async function createComment(commentData) {
     const profileImage = document.createElement('img')
     profileImage.classList.add('profile')
     profileImage.src = userData.profileImage
-        ? `http://localhost:3000/images/${userData.profileImage}`
+        ? `${myUrl}/images/${userData.profileImage}`
         : '/assets/profile_image.jpg'
 
     const commentUsername = document.createElement('b')
@@ -311,19 +318,24 @@ async function createComment(commentData) {
 }
 
 async function handleLike() {
-    const pathParts = window.location.pathname.split('/')
-    const postId = Number(pathParts[pathParts.length - 1])
-
-    const statusResponse = await likeStatus(postId)
-    let response
-    if (statusResponse.liked) {
-        response = await unlikeHelper(postId)
-    } else {
-        response = await likeHelper(postId)
+    if (!localStorage.getItem('userId')) {
+        alert('😻: 로그인이 필요합니다.')
     }
-    document.getElementById('likes').innerHTML = `${formatCount(
-        response.likes
-    )} <br />좋아요수`
+    else {
+        const pathParts = window.location.pathname.split('/')
+        const postId = Number(pathParts[pathParts.length - 1])
+    
+        const statusResponse = await likeStatus(postId)
+        let response
+        if (statusResponse.liked) {
+            response = await unlikeHelper(postId)
+        } else {
+            response = await likeHelper(postId)
+        }
+        document.getElementById('likes').innerHTML = `${formatCount(
+            response.likes
+        )} <br />좋아요수`
+    }
 }
 
 initializeProfile()
