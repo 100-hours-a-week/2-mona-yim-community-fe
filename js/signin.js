@@ -174,13 +174,13 @@ async function handleSignin() {
 function activateButton() {
     const signinButton = document.getElementById('signin')
     if (emailStatus && pwStatus && pwCheckStatus && usernameStatus) {
-        signinButton.style.backgroundColor = '#7F6AEE'
+        signinButton.style.backgroundColor = '#fd0072'
     }
 }
 
 function deactivateButton() {
     const signinButton = document.getElementById('signin')
-    signinButton.style.backgroundColor = '#ACA0EB'
+    signinButton.style.backgroundColor = '#eaa7c5'
 }
 
 function init() {
