@@ -47,9 +47,9 @@ function handleComment() {
     const commentButton = document.getElementById('comment-upload')
 
     if (!commentValue) {
-        commentButton.style.backgroundColor = '#ACA0EB'
+        commentButton.style.backgroundColor = '#fd0072'
     } else {
-        commentButton.style.backgroundColor = '#7F6AEE'
+        commentButton.style.backgroundColor = '#eaa7c5'
     }
 }
 
@@ -64,8 +64,7 @@ async function handleCommentUpload() {
         if (actionType === 'upload') {
             if (!localStorage.getItem('userId')) {
                 alert('😻: 로그인이 필요합니다')
-            }
-            else {
+            } else {
                 const response = await commentUploadHelper(
                     postId,
                     formatDate(),
@@ -320,11 +319,10 @@ async function createComment(commentData) {
 async function handleLike() {
     if (!localStorage.getItem('userId')) {
         alert('😻: 로그인이 필요합니다.')
-    }
-    else {
+    } else {
         const pathParts = window.location.pathname.split('/')
         const postId = Number(pathParts[pathParts.length - 1])
-    
+
         const statusResponse = await likeStatus(postId)
         let response
         if (statusResponse.liked) {
