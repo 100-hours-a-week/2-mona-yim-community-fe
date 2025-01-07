@@ -35,11 +35,11 @@ function validateSame() {
     if (!passwordValue) {
         document.getElementById('helper-pwcheck').textContent =
             '*비밀번호를 한번더 입력해주세요'
-        document.getElementById('edit').style.backgroundColor = '#ACA0EB'
+        document.getElementById('edit').style.backgroundColor = '#eaa7c5'
     } else if (passwordValue !== passwordCheckValue) {
         document.getElementById('helper-pwcheck').textContent =
             '비밀번호가 다릅니다.'
-        document.getElementById('edit').style.backgroundColor = '#ACA0EB'
+        document.getElementById('edit').style.backgroundColor = '#eaa7c5'
     } else {
         document.getElementById('helper-pw').textContent = ''
         document.getElementById('helper-pwcheck').textContent = ''
@@ -51,11 +51,11 @@ function validateSame() {
 }
 
 function activateButton() {
-    document.getElementById('edit').style.backgroundColor = '#7F6AEE'
+    document.getElementById('edit').style.backgroundColor = '#fd0072'
 }
 
 function deactivateButton() {
-    document.getElementById('edit').style.backgroundColor = '#ACA0EB'
+    document.getElementById('edit').style.backgroundColor = '#eaa7c5'
 }
 
 function showToast() {
