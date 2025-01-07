@@ -16,16 +16,15 @@ async function handleSubmit(event) {
     const postImageValue = postImageInput.files[0]
 
     if (subjectValue && contentValue) {
-        submitButton.style.backgroundColor = '#7F6AEE'
+        submitButton.style.backgroundColor = '#eaa7c5'
     } else {
-        submitButton.style.backgroundColor = '#ACA0EB'
+        submitButton.style.backgroundColor = '#fd0072'
     }
 
     if (event.type == 'click') {
         if (!localStorage.getItem('userId')) {
             alert('😻: 로그인이 필요합니다.')
-        }
-        else {
+        } else {
             if (!subjectValue || !contentValue) {
                 document.getElementById('helper-submit').textContent =
                     '*제목, 내용을 모두 작성해주세요'
