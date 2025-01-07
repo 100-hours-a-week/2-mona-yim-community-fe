@@ -42,7 +42,7 @@ async function handleLogin() {
     const passwordValue = document.getElementById('pw').value
 
     if (validateEmail() && validatePassword()) {
-        loginButton.style.backgroundColor = '#7F6AEE'
+        loginButton.style.backgroundColor = '#fd0072'
         const response = await loginHelper(emailValue, passwordValue)
 
         if (response.status !== 200) {
@@ -55,6 +55,6 @@ async function handleLogin() {
             window.location.href = '/posts'
         }
     } else {
-        loginButton.style.backgroundColor = '#ACA0EB'
+        loginButton.style.backgroundColor = '#eaa7c5'
     }
 }
