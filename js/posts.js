@@ -1,5 +1,5 @@
-import { userHelper } from '../api/loginRequest.js'
-import { postsHelper } from '../api/postsRequest.js'
+import { userHelper } from '../request/loginRequest.js'
+import { postsHelper } from '../request/postsRequest.js'
 import { initializeDropdown, initializeProfile } from './initialize.js'
 import { myUrl } from './initialize.js'
 

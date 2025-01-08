@@ -3,7 +3,7 @@ import {
     emailHelper,
     signinHelper,
     usernameHelper,
-} from '../api/signinRequest.js'
+} from '../request/signinRequest.js'
 
 document.getElementById('profile').addEventListener('input', handleProfile)
 document.getElementById('id').addEventListener('input', validateEmail)

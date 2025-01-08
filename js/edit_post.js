@@ -1,4 +1,4 @@
-import { postHelper, reUploadHelper } from '../api/postsRequest.js'
+import { postHelper, reUploadHelper } from '../request/postsRequest.js'
 import { initializeDropdown, initializeProfile } from './initialize.js'
 
 document.addEventListener('DOMContentLoaded', fetchPostInfo)

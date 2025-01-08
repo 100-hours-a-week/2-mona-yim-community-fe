@@ -1,5 +1,5 @@
 import { validPassword } from '../utils/function.js'
-import { passwordHelper } from '../api/loginRequest.js'
+import { passwordHelper } from '../request/loginRequest.js'
 import { initializeDropdown, initializeProfile } from './initialize.js'
 
 document.getElementById('pw').addEventListener('input', validatePassword)

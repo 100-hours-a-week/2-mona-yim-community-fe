@@ -1,6 +1,6 @@
-import { usernameHelper } from '../api/signinRequest.js'
-import { profileHelper, selfHelper } from '../api/loginRequest.js'
-import { signoutHelper } from '../api/signinRequest.js'
+import { usernameHelper } from '../request/signinRequest.js'
+import { profileHelper, selfHelper } from '../request/loginRequest.js'
+import { signoutHelper } from '../request/signinRequest.js'
 import { myUrl } from './initialize.js'
 import {
     initializeDropdown,

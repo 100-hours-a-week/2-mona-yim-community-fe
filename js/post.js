@@ -8,11 +8,11 @@ import {
     likeHelper,
     unlikeHelper,
     likeStatus,
-} from '../api/postsRequest.js'
+} from '../request/postsRequest.js'
 
 import { myUrl } from './initialize.js'
 
-import { userHelper } from '../api/loginRequest.js'
+import { userHelper } from '../request/loginRequest.js'
 
 import { formatDate } from '../utils/function.js'
 
