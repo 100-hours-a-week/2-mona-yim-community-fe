@@ -1,5 +1,5 @@
 import { logoutHelper, selfHelper } from '../request/loginRequest.js'
-export const myUrl = 'http://15.165.75.46:3000'
+export const myUrl = 'http://15.165.75.46'
 
 export function initializeDropdown() {
     const dropdown = document.getElementById('dropdown')
