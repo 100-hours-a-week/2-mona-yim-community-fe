@@ -1,5 +1,5 @@
 import { validEmail, validPassword } from '../utils/function.js'
-import { loginHelper } from '../api/loginRequest.js'
+import { loginHelper } from '../request/loginRequest.js'
 
 document.getElementById('id').addEventListener('input', validateEmail)
 document.getElementById('pw').addEventListener('input', validatePassword)

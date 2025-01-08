@@ -1,4 +1,4 @@
-import { postUploadHelper } from '../api/postsRequest.js'
+import { postUploadHelper } from '../request/postsRequest.js'
 import { formatDate } from '../utils/function.js'
 import { initializeDropdown, initializeProfile } from './initialize.js'
 
