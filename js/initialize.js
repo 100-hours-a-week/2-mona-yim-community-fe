@@ -1,6 +1,6 @@
 import { logoutHelper, selfHelper } from '../request/loginRequest.js'
 export const myUrl = 'http://43.201.75.102'
-export const imageUrl = 'https://d3bz1yrn2gzhzb.cloudfront.net/'
+export const imageUrl = 'https://d3bz1yrn2gzhzb.cloudfront.net'
 
 export function initializeDropdown() {
     const dropdown = document.getElementById('dropdown')
