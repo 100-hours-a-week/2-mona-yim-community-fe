@@ -1,6 +1,10 @@
 import { userHelper } from '../request/loginRequest.js'
 import { postsHelper } from '../request/postsRequest.js'
-import { initializeDropdown, initializeProfile } from './initialize.js'
+import {
+    imageUrl,
+    initializeDropdown,
+    initializeProfile,
+} from './initialize.js'
 import { myUrl } from './initialize.js'
 
 document.addEventListener('DOMContentLoaded', fetchPosts)
@@ -92,7 +96,7 @@ async function createPosts(postData) {
     const profileImg = document.createElement('img')
     profileImg.classList.add('profile')
     profileImg.src = userData.profileImage
-        ? `${myUrl}/images/${userData.profileImage}`
+        ? `${imageUrl}/images/${userData.profileImage}`
         : '/assets/profile_image.jpg'
     const name = document.createElement('p')
     name.classList.add('name')

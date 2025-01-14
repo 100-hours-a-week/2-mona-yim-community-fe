@@ -1,5 +1,6 @@
 import { logoutHelper, selfHelper } from '../request/loginRequest.js'
 export const myUrl = 'http://43.201.75.102'
+export const imageUrl = 'https://d3bz1yrn2gzhzb.cloudfront.net/'
 
 export function initializeDropdown() {
     const dropdown = document.getElementById('dropdown')
@@ -60,7 +61,7 @@ async function handleProfilePhoto() {
     const userData = await selfHelper()
     const profilePhotoElement = document.getElementById('profile-photo')
     const profileImageUrl = userData.profileImage
-        ? `${myUrl}/images/${userData.profileImage}`
+        ? `${imageUrl}/images/${userData.profileImage}`
         : '/assets/profile_image.jpg'
     profilePhotoElement.src = profileImageUrl
 }
